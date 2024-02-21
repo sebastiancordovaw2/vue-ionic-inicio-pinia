@@ -9,6 +9,7 @@
     <ion-content :fullscreen="true">
      
       <div id="container"> 
+        {{ mesas }}
         {{ count }} - 
         {{ doubleCount }}
         <button @click="increments"> boton</button>
@@ -23,8 +24,10 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue
 import { storeToRefs } from 'pinia';
 import { useComanda } from '../stores/comanda.js';
 const comanda = useComanda();
-const { count, doubleCount } = storeToRefs(comanda);
-const { increments } =comanda;
+const { count, mesas, doubleCount } = storeToRefs(comanda);
+const { increments, getMesas } = comanda;
+getMesas();
+
 </script>
 
 

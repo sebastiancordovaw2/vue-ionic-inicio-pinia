@@ -1,7 +1,8 @@
 import {defineStore} from 'pinia'
 export const useComanda = defineStore("comanda",{
     state:()=>({
-        count:1
+        count:1,
+        mesas:[]
     }),
     getters:{
         doubleCount:(state)=>{
@@ -11,6 +12,17 @@ export const useComanda = defineStore("comanda",{
     actions:{
         increments(){
             this.count++;
+        },
+        async getMesas(){
+            try{
+                const res = await fetch("mesas.json");
+                const data = await res.json();
+                this.mesas = data;
+            }
+            catch(error){
+                console.log(error);
+            }
+            
         }
     }
 })
