@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp, markRaw } from 'vue'
 import App from './App.vue'
 import router from './router';
 
@@ -24,10 +24,19 @@ import '@ionic/vue/css/display.css';
 import './theme/variables.css';
 import './css/index.css';
 
+import VuePapaParse from 'vue-papa-parse'
+
 import { createPinia } from 'pinia';
 
+const pinia = createPinia();
+
+pinia.use(({ store }) => {
+  store.router = markRaw(router)
+});
+
 const app = createApp(App)
-  .use(createPinia())
+  .use(VuePapaParse)
+  .use(pinia)
   .use(IonicVue)
   .use(router);
   

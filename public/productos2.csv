@@ -1,0 +1,141 @@
+﻿ID;Categoría;Subcategoría;Código;Nombre;Descripción;Precio;Activo
+204;!4F;;;menú;;36990;Si
+1500;Cafetería;;;Té;;1500;Si
+10;Cafetería;;;Café;;1500;Si
+205;Ceviche;;;Ceviche Salmon para compartir;;14990;Si
+1000;Ceviche;;;Ceviche Salmon personal;;7990;Si
+151;Chorrillanas;;;Chorrillana Mar y Tierra;Papas fritas, Verduras, Todas las carnes + Mariscos surtidos;14990;Si
+158;Chorrillanas;;;Chorrillana Mexicana;Papas fritas, Guacamole, Nachos, Jalapeños;10990;Si
+11;Chorrillanas;;;Chorrillanas Cerdo.;Papas fritas, Carne cerdo, Chorizo, Cebolla caramelizada, Huevos Fritos;10990;Si
+12;Chorrillanas;;;Chorrillanas Pollo.;Papas fritas, Carne pollo, Chorizo, Cebolla caramelizada, Huevos Fritos;10990;Si
+13;Chorrillanas;;;Chorrillanas Vacuno.;Papas fritas, Carne vacuno, Chorizo, Cebolla caramelizada, Huevos Fritos;10990;Si
+14;Chorrillanas;;;Chorrillanas Vegana;Papas fritas, champiñón salteado, pimentón, zapallo italiano, cebolla caramelizada;10990;Si
+188;Chorrillanas;;;Chorrillana todas las carnes;vacuno, cerdo, pollo;11990;Si
+15;Hamburguesas;;;Hamburguesa Chacarera;Hamburguesa vacuno, Porotos verdes, Ají verde, Tomate y Mayonesa;7000;Si
+16;Hamburguesas;;;Hamburguesa Chacarera + Papas Fritas;Hamburguesa vacuno, Porotos verdes, Ají verde, Tomate, Mayonesa y Papas Fritas;8000;Si
+143;Hamburguesas;;;Hamburguesa Curicana;Hamburguesa vacuno, Porotos verdes, Ají verde, Tomate, Mayonesa y Papas Fritas;7500;No
+142;Hamburguesas;;;Hamburguesa Curicana + Papas Fritas;Hamburguesa de cerdo + más Hamburguesa de vacuno, queso cheddar,  cebolla morada, pepinillos, salsa, tocino, huevo frito.;8000;No
+17;Hamburguesas;;;Hamburguesa Gringa;Hamburguesa vacuno, Queso cheddar, Tocino, Aros de cebolla, Lechuga y Cebolla acaramelizada;7000;Si
+18;Hamburguesas;;;Hamburguesa Gringa + Papas Fritas;Hamburguesa vacuno, Queso cheddar, Tocino, Aros de cebolla, Lechuga, Cebolla acaramelizada y Papas Fritas;8000;Si
+19;Hamburguesas;;;Hamburguesa Italiana;Hamburguesa vacuno, Palta, Tomate y Mayonesa;7000;Si
+20;Hamburguesas;;;Hamburguesa Italiana + Papas Fritas;Hamburguesa vacuno, Palta, Tomate, Mayonesa y Papas Fritas;8000;Si
+147;Hamburguesas;;;Hamburguesa Jalapeña;Hamburguesa vacuno, Filete de pollo, Guacamole, Queso cheddar, Poroto verde;7500;No
+148;Hamburguesas;;;Hamburguesa Jalapeña + Papas Fritas;Hamburguesa vacuno, Filete de pollo, Guacamole, Queso cheddar, Poroto verde;8500;No
+21;Hamburguesas;;;Wistuburguer;Hamburguesa vacuno, Doble Queso cheddar, Tocino, Pepinillos, Tomate, Lechuga y cebolla;7500;Si
+22;Hamburguesas;;;Wistuburguer + Papas Fritas;Hamburguesa vacuno, Doble Queso cheddar, Tocino, Pepinillos, Tomate, Lechuga, cebolla y Papas Fritas;8500;Si
+42;Papas fritas;;;Chicken papas;Crema de pollo, Pollo y Papas fritas;10990;Si
+43;Papas fritas;;;Papas Fritas;;7990;Si
+44;Papas fritas;;;Papas gringas;Salsa blanca con queso, Cebollín y ciboulette;10990;Si
+45;Papas fritas;;;Papas vegetarianas;Champiñón, Cebollín, Ciboulette, Zapallo Italiano, Pimentón y Papas fritas;10990;Si
+201;Pizzas medianas;;;pizza con pollo;queso, pollo, champiñones, aceitunas, choclo, barbecue;9900;Si
+178;Pizzas medianas;;;Pizza napolitana;Tomate, Queso, Orégano, Aceituna, Jamón;9900;Si
+174;Pizzas medianas;;;Pizza pepperoni;Pepperoni, Jamón, Queso, Aceituna, Cebolla Morada;9900;Si
+180;Pizzas medianas;;;Pizza vegetariana;Tomate, Queso, Aceituna, Champiñón, Pimentón, Cebolla, Choclo;9900;Si
+184;Promo fiestas patrias;;;Schop budweiser 18;;3000;no
+182;Promo fiestas patrias;;;Terremoto 500cc;;3000;no
+23;PROMOS COPETE 21:00;;;2 Aperol;válido hasta las 21:00hrs por persona;8000;SI
+192;PROMOS COPETE 21:00;;;2 Mojitos Cubanos de 500cc;válido hasta las 21:00hrs por persona;6990;Si
+193;PROMOS COPETE 21:00;;;2 Mojitos de Sabor 500cc;válido hasta las 21:00hrs por persona;7990;Si
+26;PROMOS COPETE 21:00;;;Promo pisco;2 cortos de pisco alto + bebida. válido hasta las 21:00hrs por persona;6000;Si
+191;PROMOS COPETE 21:00;;;Ramazzotti 2x;válido hasta las 21:00hrs por persona;8500;Si
+28;PROMOS COPETE 21:00;;;Tequila x6 Promo;válido hasta las 21:00hrs por persona;10000;Si
+4000;PROMOS COPETE 21:00;;;2 Schop Budweiser;válido hasta las 21:00hrs por persona;5500;Si
+3000;PROMOS COPETE 21:00;;;2 Gin Tropical;válido hasta las 21:00hrs por persona;10000;Si
+5000;PROMOS COPETE 21:00;;;2 Gin Frutal + Pulpa;válido hasta las 21:00hrs por persona;12000;Si
+6000;PROMOS COPETE 21:00;;;2 Electric lemonade 450 cc;válido hasta las 21:00hrs por persona;8500;Si
+29;Sin Alcohol;;;Agua Mineral con gas;;1300;Si
+30;Sin Alcohol;;;Agua Mineral sin gas;;1300;Si
+31;Sin Alcohol;;;Agua Tónica;;2000;Si
+32;Sin Alcohol;;;Bebida 237cc;;1500;Si
+33;Sin Alcohol;;;Coca Cola 350;;2000;Si
+34;Sin Alcohol;;;Ginger Ale Nordic 350;;2000;Si
+35;Sin Alcohol;;;Jugos naturales;Frutilla - Mango;3300;Si
+36;Sin Alcohol;;;Limonada;;3000;Si
+197;Sin Alcohol;;;Limonada menta jengibre;;3400;Si
+38;Sin Alcohol;;;Red Bull Sabores;;2200;Si
+40;Sin Alcohol;;;Red Bull Sandia;;2200;No
+41;Sin Alcohol;;;Red Bull Tropical;;2200;No
+1030;Sin Alcohol;;;Jugos Jumex;Pera, manzana, piña;2000;No
+1002;Tablas;;;Tabla surtida de la Wistu;Pollo frito, papas fritas, empanadas, sopaipillas, pebre, salsa verde;13000;Si
+46;Tablas;;;Tabla campestre Filete de costillar;Filete de costillar, Pebre, Sopaipillas, Arrollado de primavera, Papas fritas, Salsas;15990;Si
+172;Tablas;;;Tabla Rústica;Papas rústicas con aliño, Salteado de carnes, Arrollados primavera y Sopaipillas;14990;Si
+181;Tablas;;;Tabla Picoteo Mix;Empanaditas, Arrollados Primavera, sopaipillas, Aceitunas, Salsas;8990;Si
+1001;Tablas;;;Picoteo simple;Maní, aceitunas, salame, papas fritas;5000;Si
+207;Tragos;Cervezas;;Artesanal Ruil Rubia;;3990;Si
+187;Tragos;Cervezas;;Austral Calafate;;3300;Si
+50;Tragos;Cervezas;;Base Chelada;sal - limón;1000;Si
+51;Tragos;Cervezas;;Base Michelada;limón, sal, merken;1000;Si
+200;Tragos;Cervezas;;Base michelada tabasco y salsa inglesa;;1300;Si
+52;Tragos;Cervezas;;Botellines 350cc;;2800;Si
+55;Tragos;Cervezas;;Botellín Torobayo;;3000;Si
+160;Tragos;Cervezas;;Schop budweiser;;3300;Si
+194;Tragos;Cervezas;;Schop kunstmann torobayo;;3500;Si
+;Tragos;Cervezas;;Botellín Cristal;;1990;Si
+56;Tragos;Cocteles;;Amaretto sour;;4000;Si
+57;Tragos;Cocteles;;Aperol Spritz;;5000;Si
+58;Tragos;Cocteles;;Caipirinha;;4990;Si
+59;Tragos;Cocteles;;Caipiroska;;4990;Si
+61;Tragos;Cocteles;;Clavo oxidado;;5500;Si
+155;Tragos;Cocteles;;Daiquiri;;5500;Si
+62;Tragos;Cocteles;;Daiquiri Sabores;;6500;Si
+161;Tragos;Cocteles;;Electric lemonade 500cc;;5500;Si
+63;Tragos;Cocteles;;John Collins;;5500;Si
+70;Tragos;Cocteles;;Pisco sour sabores 400cc;Frutilla, mango, maracuyá, piña, frambuesa.;4990;Si
+71;Tragos;Cocteles;;Pisco Sour tradicional copa fina;;4500;Si
+72;Tragos;Cocteles;;Ramazzotti rosato spritz;;6000;Si
+156;Tragos;Cocteles;;Ramazzotti Sour 400cc;;4500;Si
+206;Tragos;Cocteles;;Ramazzotti violetto spritz;;5500;Si
+73;Tragos;Cocteles;;Ruso Blanco;;5500;Si
+74;Tragos;Cocteles;;Ruso negro.;;4990;Si
+75;Tragos;Cocteles;;Tequila Margarita;;5500;Si
+64;Tragos;Cocteles;;Tequila Margarita Blue;;5500;Si
+76;Tragos;Cocteles;;Tom Collins;;4990;Si
+77;Tragos;Cocteles;;whisky Sour 250cc;;4500;Si
+6000;Tragos;Cocteles;;Negroni;;4990;Si
+7000;Tragos;Cocteles;;Boulevardier (Negroni Whiskey);;4990;Si
+150;Tragos;Cocteles;;Moscow Mule (Vodka);;6000;Si
+150;Tragos;Cocteles;;London Mule (Gin);;6000;Si
+69;Tragos;Cremosos;;Piña colada 450cc;;6500;Si
+79;Tragos;Destilados;;Alto del Carmen 35° + Bebida;;4000;Si
+81;Tragos;Destilados;;Mistral 35° + Bebida;;4000;Si
+82;Tragos;Destilados;;Jack Daniels N7;;6500;Si
+83;Tragos;Destilados;;Jack Daniels N7 + bebida;;7500;Si
+84;Tragos;Destilados;;Jack Daniels N7 + Red Bull;;8000;Si
+85;Tragos;Destilados;;Johnnie Walker Red Label;;4990;Si
+86;Tragos;Destilados;;Johnnie Walker Red Label + Bebida;;6000;Si
+87;Tragos;Destilados;;Johnnie Walker Red Label + Red Bull;;6500;Si
+89;Tragos;Destilados;;Pisco Mistral c/ redbull;;5500;Si
+95;Tragos;Destilados;;Ron havana + Bebida;;5000;Si
+97;Tragos;Destilados;;Vodka + Bebida;;5500;Si
+8900;Tragos;Destilados;;Jagger + Bebida;;6000;Si
+8900;Tragos;Destilados;;Jagger + Redbull;;7000;Si
+9900;Tragos;Destilados;;Fernet + Cocacola;;6000;Si
+162;Tragos;Gin;;Gin + Bebida;;5500;Si
+163;Tragos;Gin;;Gin + Red Bull;;6500;Si
+98;Tragos;Gin;;Gin Red bull de Sabores;;6500;Si
+99;Tragos;Gin;;Gin Tonic;;5990;Si
+1008;Tragos;Gin;;Gin Limonade Rose;;7000;Si
+1010;Tragos;Gin;;Gin Frutal + Redbull;Pulpa frutas;7000;Si
+65;Tragos;Mojitos;;Mojito Cerveza;;6990;Si
+165;Tragos;Mojitos;;Mojito Cubano 1/2 litro;;4990;Si
+109;Tragos;Mojitos;;Mojito Cubano de 1 litro;;6990;Si
+110;Tragos;Mojitos;;Mojito de litro Sabores;;7500;Si
+196;Tragos;Mojitos;;mojito electric litro;;7500;Si
+166;Tragos;Mojitos;;Mojito Sabores 1/2 litro;;5500;Si
+100;Tragos;Shot;;Jagger;;3000;Si
+101;Tragos;Shot;;Tequila;;2000;Si
+102;Tragos;Shot;;Wistufire;Shot con fuego;3000;Si
+189;Tragos;Vinos;;Borgoña 1L;;6500;Si
+103;Tragos;Vinos;;Copa de Vino;Casillero del diablo;4000;Si
+164;Tragos;Vinos;;Sangría 1 Lt.;;5990;Si
+1020;Tragos;Tragos sin alcohol;;Budweiser sin alcohol;;2800;Si
+104;Tragos;Tragos sin alcohol;;Heineken sin alcohol 0.0;;2800;Si
+105;Tragos;Tragos sin alcohol;;Mojito cubano sin alcohol 500cc;;4500;Si
+106;Tragos;Tragos sin alcohol;;mojito sabores sin alcohol 500cc;;4990;Si
+1003;Salsas;;;Verde;;2000;Si
+1003;Salsas;;;Pebre;;2000;Si
+1003;Salsas;;;Bechamel;;2000;Si
+1003;Salsas;;;Ciboulette;;2000;Si
+7001;Tragos de autor;;;Wistulove;Ramazzotti - Tónica - Gin - Frutos;7000;Si
+7002;Tragos de autor;;;Spritz rose;Limonade rose - Gin Pink - Espumante - Frutas;7500;Si
+7004;Tragos de autor;;;Pepigin;Gin- Zumo de pepino- Azúcar- Tónica;6500;Si
