@@ -64,11 +64,5 @@ const mesaAbiertas = ref({});
 const mesaAbiertasNumero = ref({});
 // funcion que ejecuta la llamada a las mesas
 getMesas();
-
-
-
- 
- 
-
 </script>
 

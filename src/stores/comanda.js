@@ -73,7 +73,7 @@ export const useComanda = defineStore("comanda",{
         },
         setCarritoAgregar(mesa,producto)
         {
-            console.log(this.carrito);
+
 
             if(this.carrito[mesa] == undefined)
             {
@@ -117,10 +117,11 @@ export const useComanda = defineStore("comanda",{
             {
                 this.compra = JSON.parse(localStorage.getItem("compra"));
             }
-            
+
             let date = new Date();
             const hora = date.getHours()+""+date.getMinutes()+""+date.getSeconds();
             const horaViwe = date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+
             if(this.carrito[mesa] != undefined)
             {
                 for (let index = 0; index < this.carrito[mesa].length; index++) {
@@ -151,21 +152,21 @@ export const useComanda = defineStore("comanda",{
                     
                 }
 
+                let cantidad =  Object.keys(this.compra[mesa])[Object.keys(this.compra[mesa]).length - 1];
 
-                if(this.compra[mesa][hora] == undefined)
-                {
-                    this.compra[mesa][hora] = new Array();
-                }
+                if(cantidad == undefined){cantidad = 0}
+                
+                this.compra[mesa][parseInt(cantidad)+1] = this.carrito[mesa];
 
-                this.compra[mesa][hora] = this.carrito[mesa];
-    
                 delete this.carrito[mesa];
 
                 localStorage.setItem("carrito",JSON.stringify(this.carrito));
                 localStorage.setItem("compra",JSON.stringify(this.compra));
 
-                window.location.href = '/compra/'+mesa; 
+                //window.location.href = '/compra/'+mesa; 
+
             }
+            console.log(this.compra, "LA COMPRA");
         },
         getCompra()
         {
