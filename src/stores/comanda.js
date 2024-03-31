@@ -41,8 +41,7 @@ export const useComanda = defineStore("comanda",{
 
                 for (let index = 0; index < this.mesas.length; index++) {
                     for (let x = 0; x < mesaAbiertasNumero.length; x++) {
-                        
-                        console.log(mesaAbiertasNumero[x], this.mesas[index].id, "abiertas");
+                    
                         if(mesaAbiertasNumero[x]==this.mesas[index].id)
                         {
                             this.mesas[index].abierta = true;
@@ -129,7 +128,7 @@ export const useComanda = defineStore("comanda",{
 
             let date = new Date();
 
-            console.log(date.getHours(), "la cantidad");
+
             const horas = (date.getHours()<10)?"0".concat(date.getHours()):date.getHours();
             const minutos = (date.getMinutes()<10)?"0".concat(date.getMinutes()):date.getMinutes();
             const horaViwe = horas+":"+minutos
@@ -172,7 +171,7 @@ export const useComanda = defineStore("comanda",{
                 localStorage.setItem("carrito",JSON.stringify(this.carrito));
                 localStorage.setItem("compra",JSON.stringify(this.compra));
 
-                //window.location.href = '/compra/'+mesa; 
+                window.location.href = '/compra/'+mesa; 
 
             }
         },
@@ -201,9 +200,20 @@ export const useComanda = defineStore("comanda",{
               }
             
         },
-        cambiarPrecio()
+        cambiarPrecio(mesa,producto)
         {
-            const userInput = prompt("Cambiar Precio");
+            const precioInput = prompt("Cambiar Precio");
+            if(parseInt(precioInput)>0)
+            {
+                for (let index = 0; index < this.carrito[mesa].length; index++) {
+
+                    if( this.carrito[mesa][index].id == producto.id)
+                    {
+                        this.carrito[mesa][index].precioCustom = precioInput;
+                    }
+                }
+            }
+                
         }
 
     },

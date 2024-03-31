@@ -20,7 +20,7 @@
               <ion-col size="8">
                 <ion-label>{{ f.nombre }}</ion-label>
               </ion-col>
-              <ion-col><ion-label @click="cambiarPrecio(mesa,f)">{{ f.precio }}</ion-label></ion-col>
+              <ion-col><ion-label @click="cambiarPrecio(mesa,f)">{{ f.precio  }} <br v-if="f.precioCustom" /><ion-badge v-if="f.precioCustom" color="danger">{{ f.precioCustom }}</ion-badge></ion-label></ion-col>
               <ion-col>
                 <ion-badge style="margin-top: 7px; margin-right: 5px;" v-if="carritoGuardado && carritoGuardado[mesa] && verificarCantidad(f)" color="primary">{{verificarCantidad3(f)}}</ion-badge>
                 

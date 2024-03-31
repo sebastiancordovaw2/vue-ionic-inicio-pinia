@@ -20,8 +20,8 @@
                   {{ f.data.nombre }}
                 </ion-col>
                 <ion-col >{{ f.data.cantidad }}</ion-col>
-                <ion-col>{{ f.data.precio }}</ion-col>
-                <ion-col>{{ f.data.cantidad*f.data.precio }}</ion-col>
+                <ion-col>{{ f.data.precio  }} <br v-if="f.data.precioCustom" /><ion-badge v-if="f.data.precioCustom" color="danger">{{ f.data.precioCustom }}</ion-badge></ion-col>
+                <ion-col>{{ f.data.cantidad * ((f.data.precioCustom)?f.data.precioCustom:f.data.precio )}}</ion-col>
                 <ion-col><ion-button @click="eliminarCompra(mesa,f)" color="danger" shape="round">-</ion-button></ion-col>
                 </ion-row>
             </ion-grid>
@@ -104,7 +104,7 @@
     const resultadoFinalArray = resultadoFinal.value
 
     for (let index = 0; index < resultadoFinalArray.length; index++) {
-         total.value += resultadoFinalArray[index].data.precio * resultadoFinalArray[index].data.cantidad;
+         total.value += ((resultadoFinalArray[index].data.precioCustom)?resultadoFinalArray[index].data.precioCustom:resultadoFinalArray[index].data.precio) * resultadoFinalArray[index].data.cantidad;
     }
 
   </script>
