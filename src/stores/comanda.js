@@ -3,7 +3,7 @@ import {defineStore} from 'pinia'
 export const useComanda = defineStore("comanda",{
     state:()=>({
         count:1,
-        mesas:[],
+        mesas:(localStorage.getItem("mesas")!=null)?JSON.parse(localStorage.getItem("mesas")):{},
         carrito:{},
         compra:{},
     }),
@@ -19,47 +19,78 @@ export const useComanda = defineStore("comanda",{
             this.count++;
         },
         async getMesas(){
-            try{
-                const res = await fetch("mesas.json");
-                const data = await res.json();
-                this.mesas = data;
-                let mesaAbiertas={};
-                let mesaAbiertasNumero=[];
-                    let v = JSON.parse(localStorage.getItem("compra"));
-                    if(v!=undefined)
-                    {
-                    mesaAbiertas = (v!=null)?v:{};
-                    }
-                    else
-                    {
-                    mesaAbiertas = {};
-                    }
-                    
-                    mesaAbiertasNumero = Object.keys(mesaAbiertas);
+        
+                try{
 
-                    
+                    if(!this.mesas.length)
+                    {
+                        const res = await fetch("mesas.json");
+                        const data = await res.json();
+                        this.mesas = data;
+                    }
 
-                for (let index = 0; index < this.mesas.length; index++) {
-                    for (let x = 0; x < mesaAbiertasNumero.length; x++) {
-                    
-                        if(mesaAbiertasNumero[x]==this.mesas[index].id)
+                    let mesaAbiertas={};
+                    let mesaAbiertasNumero=[];
+                        let v = JSON.parse(localStorage.getItem("compra"));
+                        if(v!=undefined)
                         {
-                            this.mesas[index].abierta = true;
-                            break;
+                        mesaAbiertas = (v!=null)?v:{};
                         }
-                        else{
-                            this.mesas[index].abierta = false;
+                        else
+                        {
+                        mesaAbiertas = {};
                         }
-                    
+                        
+                        mesaAbiertasNumero = Object.keys(mesaAbiertas);
+    
+                        
+    
+                    for (let index = 0; index < this.mesas.length; index++) {
+                        for (let x = 0; x < mesaAbiertasNumero.length; x++) {
+                            
+                            
+                            if(mesaAbiertasNumero[x]==this.mesas[index].id)
+                            {
+                                this.mesas[index].abierta = true;
+                                if(mesaAbiertasNumero[x].etiqueta)
+                                {
+                                    this.mesas[index].etiqueta = mesaAbiertasNumero[x].etiqueta;
+                                }
+                               
+                                break;
+                            }
+                            else{
+                                this.mesas[index].abierta = false;
+                            }
+                        
+                        }
+                        
                     }
-                    
+    
+                    localStorage.setItem("mesas",JSON.stringify(this.mesas));
                 }
-            console.log(this.mesas)  
-            }
-            catch(error){
-                console.log(error);
-            }
+                catch(error){
+                    console.log(error);
+                }
             
+            
+            
+        },
+        cambiarEtiqueta(mesa){
+            const etiqueta = prompt("Colocal etiqueta");
+            if(etiqueta.trim())
+            {
+                this.mesas = this.mesas.map(objeto => {
+                    if(objeto.id == mesa.id)
+                    {
+                         objeto.etiqueta = etiqueta.trim()
+                    }
+                    return objeto;
+                });
+            }
+
+            localStorage.setItem("mesas",JSON.stringify(this.mesas));
+           
         },
         setCarrito(carro)
         {
@@ -194,6 +225,16 @@ export const useComanda = defineStore("comanda",{
                 {
                     delete this.compra[mesa]
                     localStorage.setItem("compra", JSON.stringify(this.compra));
+
+                    this.mesas = this.mesas.map(objeto => {
+                        if(objeto.id == mesa)
+                        {
+                            objeto.etiqueta = "";
+                            objeto.abierta = false;
+                        }
+                        return objeto;
+                    })
+                    localStorage.setItem("mesas", JSON.stringify(this.mesas));
                     window.location.href = '/mesas';
                 }
                 
@@ -202,20 +243,39 @@ export const useComanda = defineStore("comanda",{
         },
         cambiarPrecio(mesa,producto)
         {
-            const precioInput = prompt("Cambiar Precio");
-            if(parseInt(precioInput)>0)
+            if( this.carrito[mesa])
             {
-                for (let index = 0; index < this.carrito[mesa].length; index++) {
+            const precioInput = prompt("Cambiar Precio");
+           
+                if(parseInt(precioInput)>0)
+                {
+                    
+                        let encontrado = false;
+                        for (let index = 0; index < this.carrito[mesa].length; index++) {
+                            
+                            if( this.carrito[mesa][index].id == producto.id)
+                            {
+                                this.carrito[mesa][index].precioCustom = precioInput;
+                                encontrado = true;
+                                break;
+                            }
+                            else
+                            {
+                                encontrado = false;
+                            }
+                        }
 
-                    if( this.carrito[mesa][index].id == producto.id)
-                    {
-                        this.carrito[mesa][index].precioCustom = precioInput;
+                        if(!encontrado)
+                        {
+                            alert("Agrega el producto");
+                        }
                     }
-                }
-            }
-                
+                    
+                    
+                }else{
+                    alert("Agrega el producto"); 
+                }           
         }
-
     },
     
 })

@@ -1,118 +1,30 @@
-[{
-    "id":1
-}
-,
-{
-    "id":2
-}
-,
-{
-    "id":3
-}
-,
-{
-    "id":4
-}
-,
-{
-    "id":5
-}
-,
-{
-    "id":6
-}
-,
-{
-    "id":7
-}
-,
-{
-    "id":8
-}
-,
-{
-    "id":9
-}
-,
-{
-    "id":10
-}
-,
-{
-    "id":11
-}
-,
-{
-    "id":12
-}
-,
-{
-    "id":13
-}
-,
-{
-    "id":14
-}
-,
-{
-    "id":15
-}
-,
-{
-    "id":16
-}
-,
-{
-    "id":17
-}
-,
-{
-    "id":18
-}
-,
-{
-    "id":19
-}
-,
-{
-    "id":20
-}
-,
-{
-    "id":21
-}
-,
-{
-    "id":22
-}
-,
-{
-    "id":23
-}
-,
-{
-    "id":24
-}
-,
-{
-    "id":25
-}
-,
-{
-    "id":26
-}
-,
-{
-    "id":27
-}
-,
-{
-    "id":28
-},
-{
-    "id":29
-},
-{
-    "id":30
-}
-]
+[{"id": 1, "etiqueta": ""},
+ {"id": 2, "etiqueta": ""},
+ {"id": 3, "etiqueta": ""},
+ {"id": 4, "etiqueta": ""},
+ {"id": 5, "etiqueta": ""},
+ {"id": 6, "etiqueta": ""},
+ {"id": 7, "etiqueta": ""},
+ {"id": 8, "etiqueta": ""},
+ {"id": 9, "etiqueta": ""},
+ {"id": 10, "etiqueta": ""},
+ {"id": 11, "etiqueta": ""},
+ {"id": 12, "etiqueta": ""},
+ {"id": 13, "etiqueta": ""},
+ {"id": 14, "etiqueta": ""},
+ {"id": 15, "etiqueta": ""},
+ {"id": 16, "etiqueta": ""},
+ {"id": 17, "etiqueta": ""},
+ {"id": 18, "etiqueta": ""},
+ {"id": 19, "etiqueta": ""},
+ {"id": 20, "etiqueta": ""},
+ {"id": 21, "etiqueta": ""},
+ {"id": 22, "etiqueta": ""},
+ {"id": 23, "etiqueta": ""},
+ {"id": 24, "etiqueta": ""},
+ {"id": 25, "etiqueta": ""},
+ {"id": 26, "etiqueta": ""},
+ {"id": 27, "etiqueta": ""},
+ {"id": 28, "etiqueta": ""},
+ {"id": 29, "etiqueta": ""},
+ {"id": 30, "etiqueta": ""}]
