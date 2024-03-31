@@ -20,7 +20,7 @@
               <ion-col size="8">
                 <ion-label>{{ f.nombre }}</ion-label>
               </ion-col>
-              <ion-col><ion-label>{{ f.precio }}</ion-label></ion-col>
+              <ion-col><ion-label @click="cambiarPrecio(mesa,f)">{{ f.precio }}</ion-label></ion-col>
               <ion-col>
                 <ion-badge style="margin-top: 7px; margin-right: 5px;" v-if="carritoGuardado && carritoGuardado[mesa] && verificarCantidad(f)" color="primary">{{verificarCantidad3(f)}}</ion-badge>
                 
@@ -43,7 +43,7 @@ import { storeToRefs } from 'pinia';
 import { useComanda } from '../stores/comanda.js';
 const comanda = useComanda();
 let { carrito } = storeToRefs(comanda);
-const { setCarritoAgregar, setCarritoEliminar, setCarrito, setCompra } = comanda;
+const { setCarritoAgregar, setCarritoEliminar, setCarrito, setCompra, cambiarPrecio } = comanda;
 import {IonContent, IonHeader, IonPage, IonToolbar, IonSearchbar, IonItem, IonLabel, IonList, IonButton, IonBadge, IonCol, IonGrid, IonRow} from '@ionic/vue';
 import Papa from "papaparse";
 import { ref, onMounted} from "vue"

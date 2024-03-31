@@ -188,7 +188,7 @@ export const useComanda = defineStore("comanda",{
                 window.location.reload();
             }
         },
-        terminarVenta(mesa,)
+        terminarVenta(mesa)
         {
             if (confirm("Press a button!") == true) {
                 if(this.compra[mesa] != undefined)
@@ -200,7 +200,12 @@ export const useComanda = defineStore("comanda",{
                 
               }
             
+        },
+        cambiarPrecio()
+        {
+            const userInput = prompt("Cambiar Precio");
         }
+
     },
     
 })
