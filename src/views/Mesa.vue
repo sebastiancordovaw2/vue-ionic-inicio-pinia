@@ -9,30 +9,29 @@
     </ion-header>
 
     <ion-content :fullscreen="true">
-     
       <div id="container"> 
         <ion-searchbar @ionInput="search($event)"></ion-searchbar>
         
-        <ion-list v-for="f in filter" :key="f.id">
+        <ion-list v-for="(f,k) in filter" :key="f.id">
           <ion-item>
-
           <ion-grid>
             <ion-row>
+              
               <ion-col size="8">
                 <ion-label>{{ f.nombre }}</ion-label>
               </ion-col>
               <ion-col><ion-label>{{ f.precio }}</ion-label></ion-col>
               <ion-col>
-                <ion-badge style="margin-top: 7px; margin-right: 5px;" v-if="carritoGuardado && carritoGuardado[mesa] && carritoGuardado[mesa][f.id] && carritoGuardado[mesa][f.id].cantidad" color="primary">{{ carritoGuardado[mesa][f.id].cantidad }}</ion-badge>
-                <ion-button v-if="carritoGuardado && carritoGuardado[mesa] && carritoGuardado[mesa][f.id] && carritoGuardado[mesa][f.id].cantidad" @click="setCarritoEliminarF(mesa,f)" color="dark" shape="round">-</ion-button>
+                <ion-badge style="margin-top: 7px; margin-right: 5px;" v-if="carritoGuardado && carritoGuardado[mesa] && verificarCantidad(f)" color="primary">{{verificarCantidad3(f)}}</ion-badge>
+                
                 <ion-button @click="setCarritoAgregarF(mesa,f)" color="dark" shape="round">+</ion-button>
+                <ion-button v-if="carritoGuardado && carritoGuardado[mesa] && verificarCantidad(f)" @click="setCarritoEliminarF(mesa,f)" color="dark" shape="round">-</ion-button>
               </ion-col>
             </ion-row>
           </ion-grid>
 
           </ion-item>
       </ion-list>
-
       </div>
     </ion-content>
   </ion-page>
@@ -56,6 +55,14 @@ const filter = ref([])
 const mesa = ref(0);
 const route = useRoute()
 let linkMesa = "";
+
+
+
+let verificarCantidad= ref(false);
+let verificarCantidad2 = ref(false);
+let verificarCantidad3 = ref(0);
+ 
+
 onMounted(() => {
 
   mesa.value = route.params.id;
@@ -70,8 +77,41 @@ onMounted(() => {
   {
     carritoGuardado.value = carrito;
   }
-  
+
+  verificarCantidad = (f):boolean =>{
+
+    
+    for (let index = 0; index < carritoGuardado.value[mesa.value].length; index++) {
+      const element = carritoGuardado.value[mesa.value][index];
+      if(element.id == f.id)
+      {
+        if(element.cantidad>0)
+        {
+          return true;
+        }
+      }
+    }
+ }
+
+
+ verificarCantidad3 = (f):int =>{
+
+    
+for (let index = 0; index < carritoGuardado.value[mesa.value].length; index++) {
+  const element = carritoGuardado.value[mesa.value][index];
+  if(element.id == f.id)
+  {
+    if(element.cantidad>0)
+    {
+      return element.cantidad;
+    }
+  }
+}
+}
 })
+
+
+
 
 const setCarritoAgregarF = (mesa,producto) =>
 {

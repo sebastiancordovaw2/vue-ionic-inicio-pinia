@@ -73,43 +73,52 @@ export const useComanda = defineStore("comanda",{
         },
         setCarritoAgregar(mesa,producto)
         {
-
-
+           
             if(this.carrito[mesa] == undefined)
             {
                 this.carrito[mesa] = new Array();
             }
 
-            if(this.carrito[mesa][producto.id] == undefined)
+            let idABuscar = producto.id;
+            let objetoEncontrado = Object.values(this.carrito[mesa]).find(objeto => objeto.id === idABuscar); 
+           
+            if(!objetoEncontrado)
             {
-                this.carrito[mesa][producto.id] = new Array();
+                producto.cantidad = 1;
+                this.carrito[mesa].push(producto);
+            }
+            else{
+                this.carrito[mesa] = this.carrito[mesa].map(objeto => {
+                   if(objeto.id == producto.id)
+                   {
+                     objeto.cantidad +=1;
+                   }
+                   return objeto;
+                  });
             }
 
-            if(this.carrito[mesa][producto.id].id == producto.id)
-            {
-                this.carrito[mesa][producto.id].cantidad = this.carrito[mesa][producto.id].cantidad + 1
-            }
-            else
-            {
-                this.carrito[mesa][producto.id] = producto;
-                this.carrito[mesa][producto.id].cantidad = 1
-            } 
-
-            
-
+            console.log(this.carrito[mesa]);
+        
             localStorage.setItem("carrito",JSON.stringify(this.carrito));
             return this.carrito;
         },
-        setCarritoEliminar(mesa,producto)
+        setCarritoEliminar(mesa,producto, index)
         {
-            this.carrito[mesa][producto.id].cantidad = this.carrito[mesa][producto.id].cantidad - 1
-            if( this.carrito[mesa][producto.id].cantidad == 0)
+            this.carrito[mesa] = this.carrito[mesa].filter((objeto, index) => {
+           
+            if(objeto.id == producto.id)
             {
-                delete this.carrito[mesa][producto.id];
+                objeto.cantidad -=1;
             }
 
-            localStorage.setItem("carrito",JSON.stringify(this.carrito));
-            return this.carrito;
+            if( objeto.cantidad > 0)
+            {
+                return objeto;
+            }
+            
+           });
+           localStorage.setItem("carrito",JSON.stringify(this.carrito))
+           return this.carrito;
         },
         setCompra(mesa)
         {
@@ -119,8 +128,11 @@ export const useComanda = defineStore("comanda",{
             }
 
             let date = new Date();
-            const hora = date.getHours()+""+date.getMinutes()+""+date.getSeconds();
-            const horaViwe = date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+
+            console.log(date.getHours(), "la cantidad");
+            const horas = (date.getHours()<10)?"0".concat(date.getHours()):date.getHours();
+            const minutos = (date.getMinutes()<10)?"0".concat(date.getMinutes()):date.getMinutes();
+            const horaViwe = horas+":"+minutos
 
             if(this.carrito[mesa] != undefined)
             {
@@ -128,7 +140,6 @@ export const useComanda = defineStore("comanda",{
                     if(this.carrito[mesa][index] != null)
                     {
                         this.carrito[mesa][index].horaViwe = horaViwe;
-                        this.carrito[mesa][index].hora = hora;
                     }
                 }
 
@@ -144,12 +155,10 @@ export const useComanda = defineStore("comanda",{
                         else{
                             this.compra[mesa] = new Array();
                         }
-
                     }
                     else{
                         this.compra[mesa] = new Array();
                     }
-                    
                 }
 
                 let cantidad =  Object.keys(this.compra[mesa])[Object.keys(this.compra[mesa]).length - 1];
@@ -166,7 +175,6 @@ export const useComanda = defineStore("comanda",{
                 //window.location.href = '/compra/'+mesa; 
 
             }
-            console.log(this.compra, "LA COMPRA");
         },
         getCompra()
         {
@@ -174,9 +182,11 @@ export const useComanda = defineStore("comanda",{
         },
         eliminarCompra(mesa, producto)
         {
-            delete this.compra[mesa][producto.hora][producto.id];
-            localStorage.setItem("compra", JSON.stringify(this.compra));
-            window.location.reload(); 
+            if (confirm("Press a button!") == true) {
+                delete this.compra[mesa][producto.index][producto.j];
+                localStorage.setItem("compra", JSON.stringify(this.compra));
+                window.location.reload();
+            }
         },
         terminarVenta(mesa,)
         {

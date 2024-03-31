@@ -15,10 +15,13 @@
           <ion-item>
             <ion-grid>
                 <ion-row>
-                <ion-col size="5">{{ f.nombre }}</ion-col>
-                <ion-col >{{ f.cantidad }}</ion-col>
-                <ion-col>{{ f.precio }}</ion-col>
-                <ion-col>{{ f.cantidad*f.precio }}</ion-col>
+                <ion-col size="5">
+                  <ion-badge color="danger">{{ f.data.horaViwe }}</ion-badge><br/>
+                  {{ f.data.nombre }}
+                </ion-col>
+                <ion-col >{{ f.data.cantidad }}</ion-col>
+                <ion-col>{{ f.data.precio }}</ion-col>
+                <ion-col>{{ f.data.cantidad*f.data.precio }}</ion-col>
                 <ion-col><ion-button @click="eliminarCompra(mesa,f)" color="danger" shape="round">-</ion-button></ion-col>
                 </ion-row>
             </ion-grid>
@@ -82,32 +85,28 @@
     {
         compraUsuario.value = getCompra()[mesa.value]
     }
-
-    for (let index = 0; index < compraUsuario.value.length; index++) {
-        if(compraUsuario.value[index]!=null)
+    const compraUsuarioArray =  compraUsuario.value;
+    for (let index = 0; index <compraUsuarioArray.length; index++) {
+        if(compraUsuarioArray[index]!=null)
         {
             
-            for (let j = 0; j < compraUsuario.value[index].length; j++) {
+            for (let j = 0; j < compraUsuarioArray[index].length; j++) {
                 
-                if(compraUsuario.value[index][j]!=null)
+                if(compraUsuarioArray[index][j]!=null)
                 {
-                    resultadoFinal.value.push(compraUsuario.value[index][j]);
+                    resultadoFinal.value.push({data:compraUsuarioArray[index][j],index,j});
                 }
             }
-        } 
-        
-        
-        
+        }  
 
     }
 
-    for (let index = 0; index < resultadoFinal.value.length; index++) {
-         total.value += resultadoFinal.value[index].precio * resultadoFinal.value[index].cantidad;
+    const resultadoFinalArray = resultadoFinal.value
+
+    for (let index = 0; index < resultadoFinalArray.length; index++) {
+         total.value += resultadoFinalArray[index].data.precio * resultadoFinalArray[index].data.cantidad;
     }
 
-    console.log(total, "el total");
-
-    console.log(resultadoFinal.value, "resultado final");
   </script>
   
   
