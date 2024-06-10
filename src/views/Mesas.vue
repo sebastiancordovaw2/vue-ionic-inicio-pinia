@@ -24,12 +24,12 @@
           <ion-card  v-if="mesa.abierta == true" style="background-color: red; color: white; position: relative;overflow:visible !important">
             <ion-card-header>
               <ion-card-title>
-                <router-link style="color: white;" :to=" {path:'/mesa/'+mesa.id}">{{ mesa.id }} <span v-if="mesa.etiqueta"> - {{ mesa.etiqueta.charAt(0).toUpperCase() }}</span></router-link>
+                <router-link style="color: white; font-size: 13px; top: -14px; position: relative;" :to=" {path:'/mesa/'+mesa.id}">{{ mesa.id }} <span v-if="mesa.etiqueta"> - {{ mesa.etiqueta.charAt(0).toUpperCase() }}</span></router-link>
               </ion-card-title>
             </ion-card-header>
 
            
-            <ion-button  :id="mesa.id"  style="position: absolute; bottom: -13px; left: -22px" v-if="mesa.abierta == true" color="success" shape="round"></ion-button>
+            <ion-button  :id="mesa.id"  style="position: absolute; bottom: -13px; left: -22px" v-if="mesa.abierta == true && mesa.etiqueta" color="success" shape="round"></ion-button>
             <ion-button @click="cambiarEtiqueta(mesa)"  style="position: absolute; bottom: -13px; right: -22px" v-if="mesa.abierta == true" color="primary" shape="round"></ion-button>
           </ion-card>
           
