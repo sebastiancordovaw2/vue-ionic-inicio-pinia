@@ -24,7 +24,7 @@ export const useComanda = defineStore("comanda",{
 
                     if(!this.mesas.length)
                     {
-                        const res = await fetch("mesas.json");
+                        const res = await fetch("https://sebastiancordovaw2.github.io/vue-ionic-inicio-pinia/mesas.json");
                         const data = await res.json();
                         this.mesas = data;
                     }
