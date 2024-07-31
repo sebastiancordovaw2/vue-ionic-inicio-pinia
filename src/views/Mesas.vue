@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <router-link :to=" {path:'/vue-ionic-inicio-pinia/#/mesas/'}">Wistubar</router-link>
+        <a href='/vue-ionic-inicio-pinia/#/mesas/'>Wistubar</a>
       </ion-toolbar>
     </ion-header>
 
