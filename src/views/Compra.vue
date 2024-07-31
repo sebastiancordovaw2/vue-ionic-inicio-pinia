@@ -9,8 +9,8 @@
   
       <ion-content :fullscreen="true">
        
-        <div id="container" v-if="resultadoFinal && resultadoFinal?.data && resultadoFinal?.data.length"> 
-          <ion-list v-for="f in resultadoFinal?.data" :key="f.id">
+        <div id="container"> 
+          <ion-list v-for="f in resultadoFinal" :key="f.id">
             <ion-item>
               <ion-grid>
                 <ion-row>
@@ -34,9 +34,7 @@
               </ion-grid>
             </ion-item>
           </ion-list>
-          <ion-item v-else>
-            No hay datos disponibles.
-          </ion-item>
+ 
 
 
         <ion-list v-if="total>0">
@@ -102,7 +100,7 @@
                 
                 if(compraUsuarioArray[index][j]!=null)
                 {
-                    resultadoFinal.value.push({data:compraUsuarioArray[index][j],index,j});
+                    resultadoFinal.value.push({compraUsuarioArray[index][j],index,j});
                 }
             }
         }  
@@ -112,7 +110,7 @@
     const resultadoFinalArray = resultadoFinal.value
 
     for (let index = 0; index < resultadoFinalArray.length; index++) {
-         total.value += ((resultadoFinalArray[index].data.precioCustom)?resultadoFinalArray[index].data.precioCustom:resultadoFinalArray[index].data.precio) * resultadoFinalArray[index].data.cantidad;
+         total.value += ((resultadoFinalArray[index].precioCustom)?resultadoFinalArray[index].precioCustom:resultadoFinalArray[index].precio) * resultadoFinalArray[index].cantidad;
     }
 
   </script>
