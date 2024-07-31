@@ -56,7 +56,7 @@
     </ion-page>
   </template>
   
-  <script>
+  <script setup>
   import { IonContent, IonHeader, IonPage, IonToolbar, IonSearchbar, IonItem, IonLabel, IonList, IonButton, IonBadge, IonCol, IonGrid, IonRow} from '@ionic/vue';
   import { storeToRefs } from 'pinia';
   import { useComanda } from '../stores/comanda.js';
