@@ -9,6 +9,8 @@ export default defineConfig({
     vue(),
     legacy()
   ],
+  base:'https://sebastiancordovaw2.github.io/vue-ionic-inicio-pinia/',
+
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
