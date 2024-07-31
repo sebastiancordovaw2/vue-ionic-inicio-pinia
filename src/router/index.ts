@@ -7,7 +7,7 @@ import CompraPage from '../views/Compra.vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/vue-ionic-inicio-pinia/mesas'
+    redirect: '/mesas'
   },
   {
     path: '/mesas',

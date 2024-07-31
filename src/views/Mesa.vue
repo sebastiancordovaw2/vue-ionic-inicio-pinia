@@ -154,6 +154,7 @@ const getProductos = () =>
 }
  
 const search = (event)=>{
+alert("asd")
   if(event.target.value.toLowerCase().trim()!="")
   {
     filter.value = [];
