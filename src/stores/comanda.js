@@ -202,7 +202,7 @@ export const useComanda = defineStore("comanda",{
                 localStorage.setItem("carrito",JSON.stringify(this.carrito));
                 localStorage.setItem("compra",JSON.stringify(this.compra));
 
-                window.location.href = 'vue-ionic-inicio-pinia/#/compra/'+mesa; 
+                window.location.href = '/vue-ionic-inicio-pinia/#/compra/'+mesa; 
 
             }
         },
@@ -216,6 +216,7 @@ export const useComanda = defineStore("comanda",{
                 delete this.compra[mesa][producto.index][producto.j];
                 localStorage.setItem("compra", JSON.stringify(this.compra));
                 window.location.reload();
+                window.location.href = '/vue-ionic-inicio-pinia/#/compra/'+mesa;
             }
         },
         terminarVenta(mesa)
@@ -235,7 +236,7 @@ export const useComanda = defineStore("comanda",{
                         return objeto;
                     })
                     localStorage.setItem("mesas", JSON.stringify(this.mesas));
-                    window.location.href = 'vue-ionic-inicio-pinia/#/mesas';
+                    window.location.href = '/vue-ionic-inicio-pinia/#/mesas';
                 }
                 
               }
