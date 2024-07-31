@@ -55,7 +55,7 @@
   </ion-page>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonPopover, IonButton  } from '@ionic/vue';
 
 import { storeToRefs } from 'pinia';

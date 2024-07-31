@@ -37,7 +37,7 @@
   </ion-page>
 </template>
 
-<script setup lang="ts">
+<script setup>
 
 import { storeToRefs } from 'pinia';
 import { useComanda } from '../stores/comanda.js';
