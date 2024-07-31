@@ -27,7 +27,7 @@ const routes: Array<RouteRecordRaw> = [
 ]
 
 const router = createRouter({
-  history: createWebHistory("vue-ionic-inicio-pinia/#"),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes
 })
 
