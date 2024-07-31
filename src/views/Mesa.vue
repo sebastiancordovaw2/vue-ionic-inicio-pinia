@@ -66,7 +66,7 @@ let verificarCantidad3 = ref(0);
 onMounted(() => {
 
   mesa.value = route.params.id;
-  linkMesa = "vue-ionic-inicio-pinia/#/compra/"+mesa.value;
+  linkMesa = "/vue-ionic-inicio-pinia/#/compra/"+mesa.value;
   getProductos();
   if(carrito.length==undefined)
   {
