@@ -127,7 +127,7 @@ const setCarritoEliminarF = (mesa,producto) =>
   
 const getProductos = () =>
 {
-    Papa.parse("../../../productos2.csv",{
+    Papa.parse("https://sebastiancordovaw2.github.io/vue-ionic-inicio-pinia/productos2.csv",{
     download: true,
     encoding: "UTF-8",
     delimiter:";",
