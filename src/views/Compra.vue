@@ -10,7 +10,7 @@
       <ion-content :fullscreen="true">
        
         <div id="container"> 
-          {{ resultadoFinal }}
+          {{ resultadoFinal.data }}
         <ion-list v-for="f in resultadoFinal" :key='f.data.id'>
           <ion-item>
             <ion-grid>
