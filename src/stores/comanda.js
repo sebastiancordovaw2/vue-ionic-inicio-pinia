@@ -202,7 +202,7 @@ export const useComanda = defineStore("comanda",{
                 localStorage.setItem("carrito",JSON.stringify(this.carrito));
                 localStorage.setItem("compra",JSON.stringify(this.compra));
 
-                window.location.href = '/compra/'+mesa; 
+                window.location.href = 'vue-ionic-inicio-pinia/#/compra/'+mesa; 
 
             }
         },
@@ -235,7 +235,7 @@ export const useComanda = defineStore("comanda",{
                         return objeto;
                     })
                     localStorage.setItem("mesas", JSON.stringify(this.mesas));
-                    window.location.href = '/mesas';
+                    window.location.href = 'vue-ionic-inicio-pinia/#/mesas';
                 }
                 
               }
