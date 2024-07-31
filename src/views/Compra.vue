@@ -11,7 +11,7 @@
        
         <div id="container"> 
 
-        <ion-list v-for="f in resultadoFinal" :key="(f.id)?f.id:null">
+        <ion-list v-for="f in resultadoFinal" :key='f.data.id'>
           <ion-item>
             <ion-grid>
                 <ion-row>
