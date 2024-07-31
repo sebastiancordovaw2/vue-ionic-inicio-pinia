@@ -10,31 +10,25 @@
       <ion-content :fullscreen="true">
        
         <div id="container"> 
-          <ion-list v-for="f in resultadoFinal" :key="f.id">
-            <ion-item>
-              <ion-grid>
+
+        <ion-list v-for="f in resultadoFinal" :key="f.id">
+          <ion-item>
+            <ion-grid>
                 <ion-row>
-                  <ion-col size="5">
-                    <ion-badge color="danger">{{ f.horaViwe }}</ion-badge><br />
-                    {{ f.nombre }}
-                  </ion-col>
-                  <ion-col>{{ f.cantidad }}</ion-col>
-                  <ion-col>
-                    {{ f.precio }}
-                    <br v-if="f.precioCustom" />
-                    <ion-badge v-if="f.precioCustom" color="danger">{{ f.precioCustom }}</ion-badge>
-                  </ion-col>
-                  <ion-col>
-                    {{ f.cantidad * (f.precioCustom ? f.precioCustom : f.precio) }}
-                  </ion-col>
-                  <ion-col>
-                    <ion-button @click="eliminarCompra(mesa, f)" color="danger" shape="round">-</ion-button>
-                  </ion-col>
+                <ion-col size="5">
+                  <ion-badge color="danger">{{ f.data.horaViwe }}</ion-badge><br/>
+                  {{ f.data.nombre }}
+                </ion-col>
+                <ion-col >{{ f.data.cantidad }}</ion-col>
+                <ion-col>{{ f.data.precio  }} <br v-if="f.data.precioCustom" /><ion-badge v-if="f.data.precioCustom" color="danger">{{ f.data.precioCustom }}</ion-badge></ion-col>
+                <ion-col>{{ f.data.cantidad * ((f.data.precioCustom)?f.data.precioCustom:f.data.precio )}}</ion-col>
+                <ion-col><ion-button @click="eliminarCompra(mesa,f)" color="danger" shape="round">-</ion-button></ion-col>
                 </ion-row>
-              </ion-grid>
+            </ion-grid>
+
             </ion-item>
-          </ion-list>
- 
+        </ion-list>
+
 
 
         <ion-list v-if="total>0">
@@ -62,7 +56,7 @@
     </ion-page>
   </template>
   
-  <script setup lang="ts">
+  <script>
   import { IonContent, IonHeader, IonPage, IonToolbar, IonSearchbar, IonItem, IonLabel, IonList, IonButton, IonBadge, IonCol, IonGrid, IonRow} from '@ionic/vue';
   import { storeToRefs } from 'pinia';
   import { useComanda } from '../stores/comanda.js';
@@ -100,7 +94,7 @@
                 
                 if(compraUsuarioArray[index][j]!=null)
                 {
-                    resultadoFinal.value.push({compraUsuarioArray[index][j],index,j});
+                    resultadoFinal.value.push({data:compraUsuarioArray[index][j],index,j});
                 }
             }
         }  
@@ -110,7 +104,7 @@
     const resultadoFinalArray = resultadoFinal.value
 
     for (let index = 0; index < resultadoFinalArray.length; index++) {
-         total.value += ((resultadoFinalArray[index].precioCustom)?resultadoFinalArray[index].precioCustom:resultadoFinalArray[index].precio) * resultadoFinalArray[index].cantidad;
+         total.value += ((resultadoFinalArray[index].data.precioCustom)?resultadoFinalArray[index].data.precioCustom:resultadoFinalArray[index].data.precio) * resultadoFinalArray[index].data.cantidad;
     }
 
   </script>
