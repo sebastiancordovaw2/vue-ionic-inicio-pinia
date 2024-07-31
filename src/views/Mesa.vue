@@ -78,7 +78,7 @@ onMounted(() => {
     carritoGuardado.value = carrito;
   }
 
-  verificarCantidad = (f):boolean =>{
+   verificarCantidad = (f) =>{
 
     
     for (let index = 0; index < carritoGuardado.value[mesa.value].length; index++) {
@@ -94,7 +94,7 @@ onMounted(() => {
  }
 
 
- verificarCantidad3 = (f):int =>{
+ verificarCantidad3 = (f) =>{
 
     
 for (let index = 0; index < carritoGuardado.value[mesa.value].length; index++) {
