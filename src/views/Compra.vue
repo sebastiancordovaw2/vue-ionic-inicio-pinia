@@ -9,25 +9,34 @@
   
       <ion-content :fullscreen="true">
        
-        <div id="container"> 
-          {{ resultadoFinal.data }}
-        <ion-list v-for="f in resultadoFinal" :key='f.data.id'>
-          <ion-item>
-            <ion-grid>
+        <div id="container" v-if="resultadoFinal && resultadoFinal.data && resultadoFinal.data.length"> 
+          <ion-list v-for="f in resultadoFinal.data" :key="f.id">
+            <ion-item>
+              <ion-grid>
                 <ion-row>
-                <ion-col size="5">
-                  <ion-badge color="danger">{{ f.data.horaViwe }}</ion-badge><br/>
-                  {{ f.data.nombre }}
-                </ion-col>
-                <ion-col >{{ f.data.cantidad }}</ion-col>
-                <ion-col>{{ f.data.precio  }} <br v-if="f.data.precioCustom" /><ion-badge v-if="f.data.precioCustom" color="danger">{{ f.data.precioCustom }}</ion-badge></ion-col>
-                <ion-col>{{ f.data.cantidad * ((f.data.precioCustom)?f.data.precioCustom:f.data.precio )}}</ion-col>
-                <ion-col><ion-button @click="eliminarCompra(mesa,f)" color="danger" shape="round">-</ion-button></ion-col>
+                  <ion-col size="5">
+                    <ion-badge color="danger">{{ f.horaViwe }}</ion-badge><br />
+                    {{ f.nombre }}
+                  </ion-col>
+                  <ion-col>{{ f.cantidad }}</ion-col>
+                  <ion-col>
+                    {{ f.precio }}
+                    <br v-if="f.precioCustom" />
+                    <ion-badge v-if="f.precioCustom" color="danger">{{ f.precioCustom }}</ion-badge>
+                  </ion-col>
+                  <ion-col>
+                    {{ f.cantidad * (f.precioCustom ? f.precioCustom : f.precio) }}
+                  </ion-col>
+                  <ion-col>
+                    <ion-button @click="eliminarCompra(mesa, f)" color="danger" shape="round">-</ion-button>
+                  </ion-col>
                 </ion-row>
-            </ion-grid>
-
+              </ion-grid>
             </ion-item>
-        </ion-list>
+          </ion-list>
+          <ion-item v-else>
+            No hay datos disponibles.
+          </ion-item>
 
 
         <ion-list v-if="total>0">
