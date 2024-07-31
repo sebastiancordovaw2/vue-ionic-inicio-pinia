@@ -154,6 +154,8 @@ const getProductos = () =>
 }
  
 const search = (event)=>{
+
+
   
   if(event.target.value.toLowerCase().trim()!="")
   {
