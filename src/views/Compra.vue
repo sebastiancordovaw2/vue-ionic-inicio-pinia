@@ -9,8 +9,8 @@
   
       <ion-content :fullscreen="true">
        
-        <div id="container" v-if="resultadoFinal && resultadoFinal.data && resultadoFinal.data.length"> 
-          <ion-list v-for="f in resultadoFinal.data" :key="f.id">
+        <div id="container" v-if="resultadoFinal && resultadoFinal?.data && resultadoFinal?.data.length"> 
+          <ion-list v-for="f in resultadoFinal?.data" :key="f.id">
             <ion-item>
               <ion-grid>
                 <ion-row>
