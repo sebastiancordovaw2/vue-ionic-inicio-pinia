@@ -212,7 +212,7 @@ export const useComanda = defineStore("comanda",{
         },
         eliminarCompra(mesa, producto)
         {
-            if (confirm("Eleiminar venta?!") == true) {
+            if (confirm("Eliminar venta?") == true) {
                 delete this.compra[mesa][producto.index][producto.j];
                 localStorage.setItem("compra", JSON.stringify(this.compra));
                 window.location.href = '/vue-ionic-inicio-pinia/#/compra/'+mesa;
@@ -220,7 +220,7 @@ export const useComanda = defineStore("comanda",{
         },
         terminarVenta(mesa)
         {
-            if (confirm("Press a button!") == true) {
+            if (confirm("Terminar Venta?") == true) {
                 if(this.compra[mesa] != undefined)
                 {
                     delete this.compra[mesa]
