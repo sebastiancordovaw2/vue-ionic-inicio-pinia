@@ -140,13 +140,9 @@ const getProductos = () =>
           }
           productos.value[i]={
             "id":results.data[i][0],
-            "categoria":results.data[i][1],
-            "subcategoria":results.data[i][2],
-            "codigo":results.data[i][3],
-            "nombre":results.data[i][4],
-            "descripcion":results.data[i][5],
-            "precio":results.data[i][6],
-            "activo":results.data[i][7]
+            "nombre":results.data[i][1],
+            "precio":results.data[i][2],
+            "activo":results.data[i][3]
           }
         }
       },
