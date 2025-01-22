@@ -63,16 +63,16 @@
 62;Base Michelada (limón, sal, merken);1000;si
 63;Base Michelada Tabasco y Salsa Inglesa;1300;si
 64;Botellines 350cc;3000;si
-65;Austral Calafate;3500;si
+65;Botellin 350cc Austral Calafate;3500;si
 66;Schop Budweiser;3500;si
 67;Schop Kunstmann Torobayo;3990;si
 68;Artesanal;3990;si
 69;Gin con Gin;6500;si
 70;Gin + Pink Tonic;6500;si
-71;Gin Tonic;6500;si
+71;Gin Tonic;6000;si
 72;Gin Red Bull de Sabores;6990;si
 73;Gin Limonade Rose;7300;si
-74;Gin Frutal + Redbull (Pulpa Frutas);7500;si
+74;Gin Frutal + Redbull (Pulpa Frutas);7300;si
 75;Angría 1/2 Lt.;3500;si
 76;Copa de Vino (Casillero del Diablo);4000;si
 77;Borgoña 1L;6500;si
@@ -103,8 +103,8 @@
 102;Amaretto Sour;4000;si
 103;Pisco Sour Tradicional (Copa Fina);4000;si
 104;Pisco Sour Sabores 300cc (Frutilla, Mango, Maracuyá, Piña, Frambuesa);5000;si
-105;Caipirinha;6000;si
-106;Caipiroska;6000;si
+105;Caipirinha;5990;si
+106;Caipiroska;5990;si
 107;Tom Collins;5990;si
 108;Negroni;6000;si
 109;Boulevardier;6000;si
@@ -125,3 +125,7 @@
 124;Botellin 350cc sin Alcohol;3000;si
 125;Mojito Cubano sin Alcohol 500cc;4500;si
 126;Mojito Sabores sin Alcohol 500cc;4990;si
+127;Piña Colada 450cc;6500;si
+128;Frutilla Colada 450cc;6500;si
+129;Frambuesa Colada 450cc;6500;si
+130;Mai Tai;5990;si
