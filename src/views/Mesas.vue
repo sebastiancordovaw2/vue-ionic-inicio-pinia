@@ -24,7 +24,7 @@
           <ion-card  v-if="mesa.abierta == true" style="background-color: red; color: white; position: relative;overflow:visible !important">
             <ion-card-header>
               <ion-card-title>
-                <router-link style="color: white; font-size: 13px; top: -14px; position: relative;" :to=" {path:'/mesa/'+mesa.id}">{{ mesa.id }} <span v-if="mesa.etiqueta"> - {{ mesa.etiqueta.charAt(0).toUpperCase() }}</span></router-link>
+                <router-link style="color: white; font-size: 13px; top: -14px; position: relative;" :to=" {path:'/vue-ionic-inicio-pinia/#/mesa/'+mesa.id}">{{ mesa.id }} <span v-if="mesa.etiqueta"> - {{ mesa.etiqueta.charAt(0).toUpperCase() }}</span></router-link>
               </ion-card-title>
             </ion-card-header>
 
@@ -41,7 +41,7 @@
           <ion-card v-if="mesa.abierta == undefined">
             <ion-card-header>
               <ion-card-title>
-                <router-link :to=" {path:'/mesa/'+mesa.id}">{{ mesa.id }}</router-link>
+                <router-link :to=" {path:'/vue-ionic-inicio-pinia/#/mesa/'+mesa.id}">{{ mesa.id }}</router-link>
               </ion-card-title>
             </ion-card-header>
           </ion-card>
