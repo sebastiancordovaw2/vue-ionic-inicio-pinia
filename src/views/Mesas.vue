@@ -16,7 +16,7 @@
           <ion-card v-if="mesa.abierta == false">
             <ion-card-header>
               <ion-card-title>
-                <router-link :to=" {path:'/mesa/'+mesa.id}">{{ mesa.id }}</router-link>
+                <router-link :to=" {path:'/vue-ionic-inicio-pinia/#/mesa/'+mesa.id}">{{ mesa.id }}</router-link>
               </ion-card-title>
             </ion-card-header>
           </ion-card>
