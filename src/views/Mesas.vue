@@ -75,6 +75,5 @@ const popoverOpen= ref(false);
 const event =  ref(null);
 // funcion que ejecuta la llamada a las mesas
 getMesas();
-  
 </script>
 

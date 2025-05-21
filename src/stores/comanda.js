@@ -6,6 +6,7 @@ export const useComanda = defineStore("comanda",{
         mesas:(localStorage.getItem("mesas")!=null)?JSON.parse(localStorage.getItem("mesas")):{},
         carrito:{},
         compra:{},
+        mesaAbiertas:[],
     }),
     getters:{
         doubleCount:(state)=>{
@@ -27,9 +28,7 @@ export const useComanda = defineStore("comanda",{
         async getMesas(){
         
                 try{
-
-                  console.log("antes ENTRA MESAS");
-
+                    console.log(this.mesas[localStorage.getItem('IDClienteSession')] , "mesas2");
                     if(this.mesas[localStorage.getItem('IDClienteSession')] == undefined)
                     {
                         this.mesas[localStorage.getItem('IDClienteSession')] = {}
@@ -42,25 +41,24 @@ export const useComanda = defineStore("comanda",{
                         this.mesas[localStorage.getItem('IDClienteSession')] = data;
                     }
 
-                    let mesaAbiertas={};
                     let mesaAbiertasNumero=[];
                         let v = JSON.parse(localStorage.getItem("compra"));
+                        let claves = []
                         if(v!=undefined)
                         {
-                        mesaAbiertas = (v!=null)?v:{};
+                           
+                            v.forEach((v, index) => {
+                                if(v!=null)
+                                {
+                                    claves.push(index);
+                                }
+                               
+                            });
                         }
-                        else
-                        {
-                        mesaAbiertas = {};
-                        }
-                        
-                        mesaAbiertasNumero = Object.keys(mesaAbiertas);
-    
-                        
+                        mesaAbiertasNumero = claves;     
     
                     for (let index = 0; index < this.mesas[localStorage.getItem('IDClienteSession')].length; index++) {
                         for (let x = 0; x < mesaAbiertasNumero.length; x++) {
-                            
                             
                             if(mesaAbiertasNumero[x]==this.mesas[localStorage.getItem('IDClienteSession')][index].id)
                             {
