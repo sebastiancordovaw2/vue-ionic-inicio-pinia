@@ -68,12 +68,13 @@
 
   const route = useRoute()
   const comanda = useComanda();
-  let { getMesas, getCompra, setCompraCarro, eliminarCompra , terminarVenta } = comanda;
+  let { getMesas, getCompra, setCompraCarro, eliminarCompra , terminarVenta, crearIdClienteFunction} = comanda;
   
   mesa.value = route.params.id;
 
   const compraUsuario = ref({});
   const resultadoFinal= ref([]);
+  crearIdClienteFunction();
   getMesas();
     let v = JSON.parse(localStorage.getItem("compra"));
     if(getCompra()[1][mesa.value]==undefined)

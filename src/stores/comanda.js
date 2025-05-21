@@ -19,7 +19,8 @@ export const useComanda = defineStore("comanda",{
         crearIdClienteFunction()
         {
             if (localStorage.getItem('IDClienteSession') == undefined) {
-                localStorage.setItem('IDClienteSession', crypto.randomUUID())
+
+                localStorage.setItem('IDClienteSession', crypto.randomUUID()+'-'+Date.now())
             }
         },
         increments(){
@@ -31,14 +32,17 @@ export const useComanda = defineStore("comanda",{
                     console.log(this.mesas[localStorage.getItem('IDClienteSession')] , "mesas2");
                     if(this.mesas[localStorage.getItem('IDClienteSession')] == undefined)
                     {
-                        this.mesas[localStorage.getItem('IDClienteSession')] = {}
+                        //this.mesas[localStorage.getItem('IDClienteSession')] = {}
                     }
-
-                    if(!this.mesas[localStorage.getItem('IDClienteSession')].length)
+                
+                    if(localStorage.getItem('mesas')==null && this.mesas[localStorage.getItem('IDClienteSession')]==undefined)
                     {
                         const res = await fetch("https://sebastiancordovaw2.github.io/vue-ionic-inicio-pinia/mesas.json");
                         const data = await res.json();
                         this.mesas[localStorage.getItem('IDClienteSession')] = data;
+                    }
+                    else{
+                        this.mesas[localStorage.getItem('IDClienteSession')] = JSON.parse(localStorage.getItem('mesas'));
                     }
 
                     let mesaAbiertasNumero=[];
@@ -64,9 +68,13 @@ export const useComanda = defineStore("comanda",{
                             {
                                 this.mesas[localStorage.getItem('IDClienteSession')][index].abierta = true;
                                 if(mesaAbiertasNumero[x].etiqueta)
-                                {
+                                {   
+                                    
                                     this.mesas[localStorage.getItem('IDClienteSession')][index].etiqueta = mesaAbiertasNumero[x].etiqueta;
+                                    this.cambiarEtiqueta(mesaAbiertasNumero[x].id)
                                 }
+
+                                
                                
                                 break;
                             }
