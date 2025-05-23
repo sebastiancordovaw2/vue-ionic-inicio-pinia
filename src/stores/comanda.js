@@ -170,6 +170,7 @@ export const useComanda = defineStore("comanda",{
            localStorage.setItem("carrito",JSON.stringify(this.carrito[localStorage.getItem('IDClienteSession')]))
            return this.carrito[localStorage.getItem('IDClienteSession')];
         },
+        
         setCompra(mesa)
         {
             if(localStorage.getItem("compra"))
@@ -248,6 +249,33 @@ export const useComanda = defineStore("comanda",{
                 localStorage.setItem("compra", JSON.stringify(this.compra[localStorage.getItem('IDClienteSession')]));
                 window.location.href = '/vue-ionic-inicio-pinia/#/compra/'+mesa;
             }
+        },
+        eliminarCompraProducto(mesa, producto)
+        {
+          
+            for(let i =0;i<[this.compra[localStorage.getItem('IDClienteSession')][mesa][producto.index][producto.j]].length; i++){
+                    
+                let cantidad = [this.compra[localStorage.getItem('IDClienteSession')][mesa][producto.index][producto.j]][i].cantidad -=1;
+                if(cantidad < 1)
+                {
+                     this.eliminarCompra(mesa, producto);
+                }
+            };
+
+            localStorage.setItem("compra",JSON.stringify(this.compra[localStorage.getItem('IDClienteSession')]));
+            window.location.href = '/vue-ionic-inicio-pinia/#/compra/'+mesa;
+           
+        },
+        agregarCompraProducto (mesa, producto)
+        {
+          
+            for(let i =0;i<[this.compra[localStorage.getItem('IDClienteSession')][mesa][producto.index][producto.j]].length; i++){
+                    
+               let cantidad = [this.compra[localStorage.getItem('IDClienteSession')][mesa][producto.index][producto.j]][i].cantidad += 1;
+            }
+            localStorage.setItem("compra",JSON.stringify(this.compra[localStorage.getItem('IDClienteSession')]));
+            window.location.href = '/vue-ionic-inicio-pinia/#/compra/'+mesa;
+           
         },
         terminarVenta(mesa)
         {

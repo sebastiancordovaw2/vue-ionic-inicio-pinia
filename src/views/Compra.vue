@@ -22,6 +22,8 @@
                 <ion-col >{{ f.data.cantidad }}</ion-col>
                 <ion-col>{{ f.data.precio  }} <br v-if="f.data.precioCustom" /><ion-badge v-if="f.data.precioCustom" color="danger">{{ f.data.precioCustom }}</ion-badge></ion-col>
                 <ion-col>{{ f.data.cantidad * ((f.data.precioCustom)?f.data.precioCustom:f.data.precio )}}</ion-col>
+                <ion-col><ion-button @click="eliminarCompraProducto(mesa,f)" color="dark" shape="round">-</ion-button></ion-col>
+                 <ion-col><ion-button @click="agregarCompraProducto(mesa,f)" color="dark" shape="round">+</ion-button></ion-col>
                 <ion-col><ion-button @click="eliminarCompra(mesa,f)" color="danger" shape="round">-</ion-button></ion-col>
                 </ion-row>
             </ion-grid>
@@ -68,7 +70,7 @@
 
   const route = useRoute()
   const comanda = useComanda();
-  let { getMesas, getCompra, setCompraCarro, eliminarCompra , terminarVenta, crearIdClienteFunction} = comanda;
+  let { getMesas, getCompra, setCompraCarro, eliminarCompra , eliminarCompraProducto, agregarCompraProducto, terminarVenta, crearIdClienteFunction} = comanda;
   
   mesa.value = route.params.id;
 
@@ -76,37 +78,38 @@
   const resultadoFinal= ref([]);
   crearIdClienteFunction();
   getMesas();
-    let v = JSON.parse(localStorage.getItem("compra"));
-    if(getCompra()[1][mesa.value]==undefined)
-    {
-        compraUsuario.value = (v[mesa.value]!=null)?v[mesa.value]:{};
-        setCompraCarro(v);
-    }
-    else
-    {
-        compraUsuario.value = getCompra()[mesa.value]
-    }
-    const compraUsuarioArray =  compraUsuario.value;
-    for (let index = 0; index <compraUsuarioArray.length; index++) {
-        if(compraUsuarioArray[index]!=null)
-        {
-            
-            for (let j = 0; j < compraUsuarioArray[index].length; j++) {
-                
-                if(compraUsuarioArray[index][j]!=null)
-                {
-                    resultadoFinal.value.push({data:compraUsuarioArray[index][j],index,j});
-                }
-            }
-        }  
+  let v = JSON.parse(localStorage.getItem("compra"));
 
-    }
+  if(getCompra()[1][mesa.value]==undefined)
+  {
+      compraUsuario.value = (v[mesa.value]!=null)?v[mesa.value]:{};
+      setCompraCarro(v);
+  }
+  else
+  {
+      compraUsuario.value = getCompra()[mesa.value]
+  }
+  const compraUsuarioArray =  compraUsuario.value;
+  for (let index = 0; index <compraUsuarioArray.length; index++) {
+      if(compraUsuarioArray[index]!=null)
+      {
+          
+          for (let j = 0; j < compraUsuarioArray[index].length; j++) {
+              
+              if(compraUsuarioArray[index][j]!=null)
+              {
+                  resultadoFinal.value.push({data:compraUsuarioArray[index][j],index,j});
+              }
+          }
+      }  
 
-    const resultadoFinalArray = resultadoFinal.value
+  }
 
-    for (let index = 0; index < resultadoFinalArray.length; index++) {
-         total.value += ((resultadoFinalArray[index].data.precioCustom)?resultadoFinalArray[index].data.precioCustom:resultadoFinalArray[index].data.precio) * resultadoFinalArray[index].data.cantidad;
-    }
+  const resultadoFinalArray = resultadoFinal.value
+
+  for (let index = 0; index < resultadoFinalArray.length; index++) {
+        total.value += ((resultadoFinalArray[index].data.precioCustom)?resultadoFinalArray[index].data.precioCustom:resultadoFinalArray[index].data.precio) * resultadoFinalArray[index].data.cantidad;
+  }
 
   </script>
   
