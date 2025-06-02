@@ -26,7 +26,7 @@ export const useComanda = defineStore("comanda",{
         increments(){
             this.count++;
         },
-        dirigirCompra()  
+        dirigirCompra(mesa)  
         {
             window.location.href = '/#/compra/'+mesa; 
             window.location.reload(true);
