@@ -259,9 +259,9 @@ export const useComanda = defineStore("comanda",{
                 let cantidad = [this.compra[mesa][producto.index][producto.j]][i].cantidad;
                 if(cantidad <=1)
                 {
-                     [this.compra[mesa][producto.index][producto.j]][i].cantidad -=1
                      this.eliminarCompra(mesa, producto);
                 }
+                [this.compra[mesa][producto.index][producto.j]][i].cantidad -=1
             };
 
             localStorage.setItem("compra",JSON.stringify(this.compra));
