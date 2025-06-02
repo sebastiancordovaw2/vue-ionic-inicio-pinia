@@ -234,7 +234,7 @@ export const useComanda = defineStore("comanda",{
                 
                 console.log(localStorage.getItem("compra"), "esto se compro");
 
-                window.location.href = '/compra/'+mesa; 
+                window.location.href = '/#/compra/'+mesa; 
 
             }
         },
