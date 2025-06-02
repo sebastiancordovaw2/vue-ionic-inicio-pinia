@@ -260,11 +260,12 @@ export const useComanda = defineStore("comanda",{
                 if(cantidad < 1)
                 {
                      this.eliminarCompra(mesa, producto);
+                    break;
                 }
             };
 
-        localStorage.setItem("compra",JSON.stringify(this.compra));
-           window.location.reload(true);
+            localStorage.setItem("compra",JSON.stringify(this.compra));
+             window.location.reload(true);
            
         },
         agregarCompraProducto (mesa, producto)
