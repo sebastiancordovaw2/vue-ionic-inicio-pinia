@@ -28,71 +28,51 @@ export const useComanda = defineStore("comanda",{
         },
         async getMesas(){
         
-                try{
-                    console.log(this.mesas , "mesas2");
-                    if(this.mesas == undefined)
-                    {
-                        //this.mesas = {}
-                    }
-                
-                    if(localStorage.getItem('mesas')==null && this.mesas==undefined)
-                    {
-                        const res = await fetch("https://sebastiancordovaw2.github.io/mesas.json");
-                        const data = await res.json();
-                        this.mesas = data;
-                    }
-                    else{
-                        this.mesas = JSON.parse(localStorage.getItem('mesas'));
-                    }
-
-                    let mesaAbiertasNumero=[];
-                        let v = JSON.parse(localStorage.getItem("compra"));
-                        let claves = []
-                        if(v!=undefined)
-                        {
-                           
-                            v.forEach((v, index) => {
-                                if(v!=null)
-                                {
-                                    claves.push(index);
-                                }
-                               
-                            });
-                        }
-                        mesaAbiertasNumero = claves;     
-    
-                    for (let index = 0; index < this.mesas.length; index++) {
-                        for (let x = 0; x < mesaAbiertasNumero.length; x++) {
-                            
-                            if(mesaAbiertasNumero[x]==this.mesas[index].id)
-                            {
-                                this.mesas[index].abierta = true;
-                                if(mesaAbiertasNumero[x].etiqueta)
-                                {   
-                                    
-                                    this.mesas[index].etiqueta = mesaAbiertasNumero[x].etiqueta;
-                                    this.cambiarEtiqueta(mesaAbiertasNumero[x].id)
-                                }
-
-                                
-                               
-                                break;
-                            }
-                            else{
-                                this.mesas[index].abierta = false;
-                            }
-                        
-                        }
-                        
-                    }
-    
-                    localStorage.setItem("mesas",JSON.stringify(this.mesas));
+            try {
+                // Paso 1: Obtener mesas del localStorage o del servidor
+                let mesas = JSON.parse(localStorage.getItem('mesas'));
+                if (!mesas) {
+                    const res = await fetch("https://comanda-wistubar.netlify.app/mesas.json");
+                    mesas = await res.json();
                 }
-                catch(error){
-                    console.log(error);
-                }
-            
-            
+
+                // Paso 2: Obtener las mesas abiertas desde la compra
+                let compra = JSON.parse(localStorage.getItem("compra")) || [];
+                let mesasAbiertasIds = [];
+
+                compra.forEach((item, index) => {
+                    if (item != null) {
+                        mesasAbiertasIds.push(index);
+                    }
+                });
+
+                // Paso 3: Marcar mesas como abiertas y aplicar etiquetas si existen
+                mesas.forEach((mesa) => {
+                    const indexCompra = mesasAbiertasIds.findIndex(id => id == mesa.id);
+                    if (indexCompra !== -1) {
+                        mesa.abierta = true;
+                        if (compra[indexCompra]?.etiqueta) {
+                            mesa.etiqueta = compra[indexCompra].etiqueta;
+                            // Llama a tu función si es necesario (comentado por ser opcional)
+                            // this.cambiarEtiqueta(mesa.id);
+                        }
+                    } else {
+                        mesa.abierta = false;
+                    }
+                });
+
+                // Paso 4: Guardar en localStorage actualizado
+                localStorage.setItem("mesas", JSON.stringify(mesas));
+
+                // Si estás en un componente y quieres guardar el resultado:
+                // this.mesas = mesas;
+
+                console.log("Mesas actualizadas:", mesas);
+                return mesas; // opcional si necesitas usarla después
+
+            } catch (error) {
+                console.error("Error al cargar y actualizar mesas:", error);
+            }
             
         },
         cambiarEtiqueta(mesa){
