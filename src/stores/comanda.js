@@ -32,7 +32,7 @@ export const useComanda = defineStore("comanda",{
                 // Paso 1: Obtener mesas del localStorage o del servidor
                 let mesas = JSON.parse(localStorage.getItem('mesas'));
                 if (!mesas) {
-                    const res = await fetch("https://comanda-wistubar.netlify.app/mesas.json");
+                    const res = await fetch("https://comanda-wistubar.netlify.app//mesas.json");
                     mesas = await res.json();
                 }
 
@@ -214,7 +214,7 @@ export const useComanda = defineStore("comanda",{
                 
                 console.log(localStorage.getItem("compra"), "esto se compro");
 
-                window.location.href = '#/compra/'+mesa; 
+                window.location.href = '/#/compra/'+mesa; 
 
             }
         },
