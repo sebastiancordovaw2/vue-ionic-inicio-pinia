@@ -37,7 +37,7 @@ export const useComanda = defineStore("comanda",{
                 
                     if(localStorage.getItem('mesas')==null && this.mesas==undefined)
                     {
-                        const res = await fetch("https://sebastiancordovaw2.github.io/vue-ionic-inicio-pinia/mesas.json");
+                        const res = await fetch("https://sebastiancordovaw2.github.io/mesas.json");
                         const data = await res.json();
                         this.mesas = data;
                     }
@@ -247,7 +247,7 @@ export const useComanda = defineStore("comanda",{
             if (confirm("Eliminar venta?") == true) {
                 delete this.compra[mesa][producto.index][producto.j];
                 localStorage.setItem("compra", JSON.stringify(this.compra));
-                window.location.href = '/vue-ionic-inicio-pinia/#/compra/'+mesa;
+                window.location.href = '/#/compra/'+mesa;
             }
         },
         eliminarCompraProducto(mesa, producto)
@@ -263,7 +263,7 @@ export const useComanda = defineStore("comanda",{
             };
 
             localStorage.setItem("compra",JSON.stringify(this.compra));
-            window.location.href = '/vue-ionic-inicio-pinia/#/compra/'+mesa;
+            window.location.href = '/#/compra/'+mesa;
            
         },
         agregarCompraProducto (mesa, producto)
@@ -274,7 +274,7 @@ export const useComanda = defineStore("comanda",{
                let cantidad = [this.compra[mesa][producto.index][producto.j]][i].cantidad += 1;
             }
             localStorage.setItem("compra",JSON.stringify(this.compra));
-            window.location.href = '/vue-ionic-inicio-pinia/#/compra/'+mesa;
+            window.location.href = '/#/compra/'+mesa;
            
         },
         terminarVenta(mesa)
@@ -296,7 +296,7 @@ export const useComanda = defineStore("comanda",{
                         return objeto;
                     })
                     localStorage.setItem("mesas", JSON.stringify(this.mesas));
-                    window.location.href = '/vue-ionic-inicio-pinia/#/mesas';
+                    window.location.href = '/#/mesas';
                 }
                 
               }
