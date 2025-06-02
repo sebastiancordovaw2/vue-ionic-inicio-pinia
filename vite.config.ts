@@ -9,7 +9,7 @@ export default defineConfig({
     vue(),
     legacy()
   ],
-  //base:'comanda-wistubar.netlify.app',
+  base:'https://comanda-wistubar.netlify.app/',
 
   resolve: {
     alias: {
