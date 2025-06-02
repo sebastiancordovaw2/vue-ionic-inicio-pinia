@@ -6,6 +6,7 @@ export const useComanda = defineStore("comanda",{
         mesas:(localStorage.getItem("mesas")!=null)?JSON.parse(localStorage.getItem("mesas")):{},
         carrito:{},
         compra:{},
+        mesaAbiertas:[],
     }),
     getters:{
         doubleCount:(state)=>{
@@ -15,59 +16,77 @@ export const useComanda = defineStore("comanda",{
 
     },
     actions:{
+        crearIdClienteFunction()
+        {
+            if (localStorage.getItem('IDClienteSession') == undefined) {
+
+                localStorage.setItem('IDClienteSession', crypto.randomUUID()+'-'+Date.now())
+            }
+        },
         increments(){
             this.count++;
         },
         async getMesas(){
         
                 try{
-
-                    if(!this.mesas.length)
+                    console.log(this.mesas[localStorage.getItem('IDClienteSession')] , "mesas2");
+                    if(this.mesas[localStorage.getItem('IDClienteSession')] == undefined)
+                    {
+                        //this.mesas[localStorage.getItem('IDClienteSession')] = {}
+                    }
+                
+                    if(localStorage.getItem('mesas')==null && this.mesas[localStorage.getItem('IDClienteSession')]==undefined)
                     {
                         const res = await fetch("https://sebastiancordovaw2.github.io/vue-ionic-inicio-pinia/mesas.json");
                         const data = await res.json();
-                        this.mesas = data;
+                        this.mesas[localStorage.getItem('IDClienteSession')] = data;
+                    }
+                    else{
+                        this.mesas[localStorage.getItem('IDClienteSession')] = JSON.parse(localStorage.getItem('mesas'));
                     }
 
-                    let mesaAbiertas={};
                     let mesaAbiertasNumero=[];
                         let v = JSON.parse(localStorage.getItem("compra"));
+                        let claves = []
                         if(v!=undefined)
                         {
-                        mesaAbiertas = (v!=null)?v:{};
+                           
+                            v.forEach((v, index) => {
+                                if(v!=null)
+                                {
+                                    claves.push(index);
+                                }
+                               
+                            });
                         }
-                        else
-                        {
-                        mesaAbiertas = {};
-                        }
-                        
-                        mesaAbiertasNumero = Object.keys(mesaAbiertas);
+                        mesaAbiertasNumero = claves;     
     
-                        
-    
-                    for (let index = 0; index < this.mesas.length; index++) {
+                    for (let index = 0; index < this.mesas[localStorage.getItem('IDClienteSession')].length; index++) {
                         for (let x = 0; x < mesaAbiertasNumero.length; x++) {
                             
-                            
-                            if(mesaAbiertasNumero[x]==this.mesas[index].id)
+                            if(mesaAbiertasNumero[x]==this.mesas[localStorage.getItem('IDClienteSession')][index].id)
                             {
-                                this.mesas[index].abierta = true;
+                                this.mesas[localStorage.getItem('IDClienteSession')][index].abierta = true;
                                 if(mesaAbiertasNumero[x].etiqueta)
-                                {
-                                    this.mesas[index].etiqueta = mesaAbiertasNumero[x].etiqueta;
+                                {   
+                                    
+                                    this.mesas[localStorage.getItem('IDClienteSession')][index].etiqueta = mesaAbiertasNumero[x].etiqueta;
+                                    this.cambiarEtiqueta(mesaAbiertasNumero[x].id)
                                 }
+
+                                
                                
                                 break;
                             }
                             else{
-                                this.mesas[index].abierta = false;
+                                this.mesas[localStorage.getItem('IDClienteSession')][index].abierta = false;
                             }
                         
                         }
                         
                     }
     
-                    localStorage.setItem("mesas",JSON.stringify(this.mesas));
+                    localStorage.setItem("mesas",JSON.stringify(this.mesas[localStorage.getItem('IDClienteSession')]));
                 }
                 catch(error){
                     console.log(error);
@@ -94,31 +113,34 @@ export const useComanda = defineStore("comanda",{
         },
         setCarrito(carro)
         {
-            this.carrito = carro;
-           
+            this.carrito[localStorage.getItem('IDClienteSession')] = carro;
         },
         setCompraCarro(compra)
         {
-            this.compra = compra; 
+            this.compra[localStorage.getItem('IDClienteSession')] = compra; 
         },
         setCarritoAgregar(mesa,producto)
         {
-           
-            if(this.carrito[mesa] == undefined)
+            if(this.carrito[localStorage.getItem('IDClienteSession')] == undefined)
             {
-                this.carrito[mesa] = new Array();
+                this.carrito[localStorage.getItem('IDClienteSession')] = new Array();
+            }
+           
+            if(this.carrito[localStorage.getItem('IDClienteSession')][mesa] == undefined)
+            {
+                this.carrito[localStorage.getItem('IDClienteSession')][mesa] = new Array();
             }
 
             let idABuscar = producto.id;
-            let objetoEncontrado = Object.values(this.carrito[mesa]).find(objeto => objeto.id === idABuscar); 
+            let objetoEncontrado = Object.values(this.carrito[localStorage.getItem('IDClienteSession')][mesa]).find(objeto => objeto.id === idABuscar); 
            
             if(!objetoEncontrado)
             {
                 producto.cantidad = 1;
-                this.carrito[mesa].push(producto);
+                this.carrito[localStorage.getItem('IDClienteSession')][mesa].push(producto);
             }
             else{
-                this.carrito[mesa] = this.carrito[mesa].map(objeto => {
+                this.carrito[localStorage.getItem('IDClienteSession')][mesa] = this.carrito[localStorage.getItem('IDClienteSession')][mesa].map(objeto => {
                    if(objeto.id == producto.id)
                    {
                      objeto.cantidad +=1;
@@ -127,14 +149,12 @@ export const useComanda = defineStore("comanda",{
                   });
             }
 
-            console.log(this.carrito[mesa]);
-        
-            localStorage.setItem("carrito",JSON.stringify(this.carrito));
-            return this.carrito;
+            localStorage.setItem("carrito",JSON.stringify(this.carrito[localStorage.getItem('IDClienteSession')]));
+            return this.carrito[localStorage.getItem('IDClienteSession')];
         },
         setCarritoEliminar(mesa,producto, index)
         {
-            this.carrito[mesa] = this.carrito[mesa].filter((objeto, index) => {
+            this.carrito[localStorage.getItem('IDClienteSession')][mesa] = this.carrito[localStorage.getItem('IDClienteSession')][mesa].filter((objeto, index) => {
            
             if(objeto.id == producto.id)
             {
@@ -147,14 +167,18 @@ export const useComanda = defineStore("comanda",{
             }
             
            });
-           localStorage.setItem("carrito",JSON.stringify(this.carrito))
-           return this.carrito;
+           localStorage.setItem("carrito",JSON.stringify(this.carrito[localStorage.getItem('IDClienteSession')]))
+           return this.carrito[localStorage.getItem('IDClienteSession')];
         },
+        
         setCompra(mesa)
         {
             if(localStorage.getItem("compra"))
             {
-                this.compra = JSON.parse(localStorage.getItem("compra"));
+                this.compra[localStorage.getItem('IDClienteSession')] = JSON.parse(localStorage.getItem("compra"));
+            }
+            else{
+                this.compra[localStorage.getItem('IDClienteSession')] = new Array()
             }
 
             let date = new Date();
@@ -164,43 +188,51 @@ export const useComanda = defineStore("comanda",{
             const minutos = (date.getMinutes()<10)?"0".concat(date.getMinutes()):date.getMinutes();
             const horaViwe = horas+":"+minutos
 
-            if(this.carrito[mesa] != undefined)
+            if(this.carrito[localStorage.getItem('IDClienteSession')][mesa] != undefined)
             {
-                for (let index = 0; index < this.carrito[mesa].length; index++) {
-                    if(this.carrito[mesa][index] != null)
+                for (let index = 0; index < this.carrito[localStorage.getItem('IDClienteSession')][mesa].length; index++) {
+                    if(this.carrito[localStorage.getItem('IDClienteSession')][mesa][index] != null)
                     {
-                        this.carrito[mesa][index].horaViwe = horaViwe;
+                        this.carrito[localStorage.getItem('IDClienteSession')][mesa][index].horaViwe = horaViwe;
                     }
                 }
 
-                if(this.compra[mesa] == undefined)
+                if(this.compra[localStorage.getItem('IDClienteSession')]==undefined)
+                {
+                   this.compra[localStorage.getItem('IDClienteSession')] = new Array(); 
+                }
+
+                if( this.compra[localStorage.getItem('IDClienteSession')][mesa] == undefined)
                 {
                     if(localStorage.getItem("compra"))
                     {
                         let v = JSON.parse(localStorage.getItem("compra"));
                         if(v[mesa])
                         {
-                            this.compra[mesa] =v[mesa];
+                            this.compra[localStorage.getItem('IDClienteSession')][mesa] =v[mesa];
                         }
                         else{
-                            this.compra[mesa] = new Array();
+
+                            this.compra[localStorage.getItem('IDClienteSession')][mesa] = new Array();
                         }
                     }
                     else{
-                        this.compra[mesa] = new Array();
+                        this.compra[localStorage.getItem('IDClienteSession')][mesa] = new Array();
                     }
                 }
 
-                let cantidad =  Object.keys(this.compra[mesa])[Object.keys(this.compra[mesa]).length - 1];
+                let cantidad =  Object.keys(this.compra[localStorage.getItem('IDClienteSession')][mesa])[Object.keys(this.compra[localStorage.getItem('IDClienteSession')][mesa]).length - 1];
 
                 if(cantidad == undefined){cantidad = 0}
                 
-                this.compra[mesa][parseInt(cantidad)+1] = this.carrito[mesa];
+                this.compra[localStorage.getItem('IDClienteSession')][mesa][parseInt(cantidad)+1] = this.carrito[localStorage.getItem('IDClienteSession')][mesa];
 
-                delete this.carrito[mesa];
+                delete this.carrito[localStorage.getItem('IDClienteSession')][mesa];
 
-                localStorage.setItem("carrito",JSON.stringify(this.carrito));
-                localStorage.setItem("compra",JSON.stringify(this.compra));
+                localStorage.setItem("carrito",JSON.stringify(this.carrito[localStorage.getItem('IDClienteSession')]));
+                localStorage.setItem("compra",JSON.stringify(this.compra[localStorage.getItem('IDClienteSession')]));
+                
+                console.log(localStorage.getItem("compra"), "esto se compro");
 
                 window.location.href = '/compra/'+mesa; 
 
@@ -208,25 +240,54 @@ export const useComanda = defineStore("comanda",{
         },
         getCompra()
         {
-            return this.compra;
+            return localStorage.getItem("compra");
         },
         eliminarCompra(mesa, producto)
         {
             if (confirm("Eliminar venta?") == true) {
                 delete this.compra[mesa][producto.index][producto.j];
                 localStorage.setItem("compra", JSON.stringify(this.compra));
-                window.location.href = '/compra/'+mesa;
+                window.location.href = '/vue-ionic-inicio-pinia/#/compra/'+mesa;
             }
+        },
+        eliminarCompraProducto(mesa, producto)
+        {
+          
+            for(let i =0;i<[this.compra[localStorage.getItem('IDClienteSession')][mesa][producto.index][producto.j]].length; i++){
+                    
+                let cantidad = [this.compra[localStorage.getItem('IDClienteSession')][mesa][producto.index][producto.j]][i].cantidad -=1;
+                if(cantidad < 1)
+                {
+                     this.eliminarCompra(mesa, producto);
+                }
+            };
+
+            localStorage.setItem("compra",JSON.stringify(this.compra[localStorage.getItem('IDClienteSession')]));
+            window.location.href = '/vue-ionic-inicio-pinia/#/compra/'+mesa;
+           
+        },
+        agregarCompraProducto (mesa, producto)
+        {
+          
+            for(let i =0;i<[this.compra[localStorage.getItem('IDClienteSession')][mesa][producto.index][producto.j]].length; i++){
+                    
+               let cantidad = [this.compra[localStorage.getItem('IDClienteSession')][mesa][producto.index][producto.j]][i].cantidad += 1;
+            }
+            localStorage.setItem("compra",JSON.stringify(this.compra[localStorage.getItem('IDClienteSession')]));
+            window.location.href = '/vue-ionic-inicio-pinia/#/compra/'+mesa;
+           
         },
         terminarVenta(mesa)
         {
+            this.getMesas();
             if (confirm("Terminar Venta?") == true) {
-                if(this.compra[mesa] != undefined)
+                if(this.compra[localStorage.getItem('IDClienteSession')][mesa] != undefined)
                 {
-                    delete this.compra[mesa]
-                    localStorage.setItem("compra", JSON.stringify(this.compra));
+                    
+                    delete this.compra[localStorage.getItem('IDClienteSession')][mesa]
+                    localStorage.setItem("compra", JSON.stringify(this.compra[localStorage.getItem('IDClienteSession')]));
 
-                    this.mesas = this.mesas.map(objeto => {
+                    this.mesas[localStorage.getItem('IDClienteSession')] = this.mesas[localStorage.getItem('IDClienteSession')].map(objeto => {
                         if(objeto.id == mesa)
                         {
                             objeto.etiqueta = "";
@@ -235,7 +296,7 @@ export const useComanda = defineStore("comanda",{
                         return objeto;
                     })
                     localStorage.setItem("mesas", JSON.stringify(this.mesas));
-                    window.location.href = '/mesas';
+                    window.location.href = '/vue-ionic-inicio-pinia/#/mesas';
                 }
                 
               }
@@ -243,19 +304,19 @@ export const useComanda = defineStore("comanda",{
         },
         cambiarPrecio(mesa,producto)
         {
-            if( this.carrito[mesa])
+            if( this.carrito[localStorage.getItem('IDClienteSession')][mesa])
             {
-            const precioInput = prompt("Cambiar Precio");
+                const precioInput = prompt("Cambiar Precio");
            
                 if(parseInt(precioInput)>0)
                 {
                     
                         let encontrado = false;
-                        for (let index = 0; index < this.carrito[mesa].length; index++) {
+                        for (let index = 0; index < this.carrito[localStorage.getItem('IDClienteSession')][mesa].length; index++) {
                             
-                            if( this.carrito[mesa][index].id == producto.id)
+                            if( this.carrito[localStorage.getItem('IDClienteSession')][mesa][index].id == producto.id)
                             {
-                                this.carrito[mesa][index].precioCustom = precioInput;
+                                this.carrito[localStorage.getItem('IDClienteSession')][mesa][index].precioCustom = precioInput;
                                 encontrado = true;
                                 break;
                             }

@@ -65,7 +65,7 @@ import { ref, onMounted} from "vue"
 
 const comanda = useComanda();
 const { count, mesas, doubleCount} = storeToRefs(comanda);
-const { increments, getMesas, getCompra, cambiarEtiqueta } = comanda;
+const { increments, getMesas, getCompra, cambiarEtiqueta, crearIdClienteFunction } = comanda;
 
 const mesaAbiertas = ref({});
 const mesaAbiertasNumero = ref({});
@@ -74,7 +74,7 @@ const ultimoToque = ref(0);
 const popoverOpen= ref(false);
 const event =  ref(null);
 // funcion que ejecuta la llamada a las mesas
+crearIdClienteFunction();
 getMesas();
-  
 </script>
 

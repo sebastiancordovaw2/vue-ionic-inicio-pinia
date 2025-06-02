@@ -43,7 +43,7 @@ import { storeToRefs } from 'pinia';
 import { useComanda } from '../stores/comanda.js';
 const comanda = useComanda();
 let { carrito } = storeToRefs(comanda);
-const { setCarritoAgregar, setCarritoEliminar, setCarrito, setCompra, cambiarPrecio } = comanda;
+const { setCarritoAgregar, setCarritoEliminar, setCarrito, setCompra, cambiarPrecio,  crearIdClienteFunction } = comanda;
 import {IonContent, IonHeader, IonPage, IonToolbar, IonSearchbar, IonItem, IonLabel, IonList, IonButton, IonBadge, IonCol, IonGrid, IonRow} from '@ionic/vue';
 import Papa from "papaparse";
 import { ref, onMounted} from "vue"
@@ -61,16 +61,18 @@ let linkMesa = "";
 let verificarCantidad= ref(false);
 let verificarCantidad2 = ref(false);
 let verificarCantidad3 = ref(0);
- 
+
+crearIdClienteFunction();
 
 onMounted(() => {
 
   mesa.value = route.params.id;
   linkMesa = "/compra/"+mesa.value;
   getProductos();
+
   if(carrito.length==undefined)
-  {
-    carritoGuardado.value = (localStorage.getItem("carrito")!=null)?JSON.parse(localStorage.getItem("carrito")):{};
+  {  
+    carritoGuardado.value = (localStorage.getItem("carrito")!=null)?JSON.parse(localStorage.getItem("carrito")):{};    
     setCarrito(carritoGuardado.value);
   }
   else
