@@ -26,6 +26,11 @@ export const useComanda = defineStore("comanda",{
         increments(){
             this.count++;
         },
+        dirigirCompra()  
+        {
+            window.location.href = '/#/compra/'+mesa; 
+            window.location.reload(true);
+        },
         async getMesas(){
         
             try {

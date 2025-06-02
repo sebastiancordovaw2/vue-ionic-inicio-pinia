@@ -3,7 +3,7 @@
     <ion-header :translucent="true">
       <ion-toolbar>
         <ion-button color="success" @click="setCompra(mesa)">Mesa {{ mesa }} Aceptar</ion-button>
-        <a style="color: white; text-decoration: none;" :href="linkMesa"><ion-button color="dark" >Venta</ion-button></a>
+        <a style="color: white; text-decoration: none;" @click="dirigirCompra(mesa)"><ion-button color="dark" >Venta</ion-button></a>
         
       </ion-toolbar>
     </ion-header>
@@ -43,7 +43,7 @@ import { storeToRefs } from 'pinia';
 import { useComanda } from '../stores/comanda.js';
 const comanda = useComanda();
 let { carrito } = storeToRefs(comanda);
-const { setCarritoAgregar, setCarritoEliminar, setCarrito, setCompra, cambiarPrecio,  crearIdClienteFunction } = comanda;
+const { setCarritoAgregar, setCarritoEliminar, setCarrito, setCompra, cambiarPrecio,  crearIdClienteFunction, dirigirCompra } = comanda;
 import {IonContent, IonHeader, IonPage, IonToolbar, IonSearchbar, IonItem, IonLabel, IonList, IonButton, IonBadge, IonCol, IonGrid, IonRow} from '@ionic/vue';
 import Papa from "papaparse";
 import { ref, onMounted} from "vue"
