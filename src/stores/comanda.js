@@ -244,7 +244,8 @@ export const useComanda = defineStore("comanda",{
         },
         eliminarCompra(mesa, producto)
         {
-            if (confirm("Eliminar venta?") == true) {
+            if (confirm("Eliminar venta?") === true) 
+            {
                 delete this.compra[mesa][producto.index][producto.j];
                 localStorage.setItem("compra", JSON.stringify(this.compra));
                 window.location.reload(true);
@@ -262,7 +263,7 @@ export const useComanda = defineStore("comanda",{
                 }
             };
 
-            localStorage.setItem("compra",JSON.stringify(this.compra));
+        localStorage.setItem("compra",JSON.stringify(this.compra));
            window.location.reload(true);
            
         },
