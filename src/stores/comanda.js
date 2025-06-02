@@ -215,6 +215,7 @@ export const useComanda = defineStore("comanda",{
                 console.log(localStorage.getItem("compra"), "esto se compro");
 
                 window.location.href = '/#/compra/'+mesa; 
+                window.location.reload(true);
 
             }
         },
@@ -229,6 +230,7 @@ export const useComanda = defineStore("comanda",{
                 delete this.compra[mesa][producto.index][producto.j];
                 localStorage.setItem("compra", JSON.stringify(this.compra));
                 window.location.reload(true);
+                 
             }
         },
         eliminarCompraProducto(mesa, producto)
