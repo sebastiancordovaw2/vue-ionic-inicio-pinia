@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <a href='/vue-ionic-inicio-pinia/#/mesas/'>Wistubar</a>
+        <a href='/mesas/'>Wistubar</a>
       </ion-toolbar>
     </ion-header>
 

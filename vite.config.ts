@@ -9,7 +9,7 @@ export default defineConfig({
     vue(),
     legacy()
   ],
-  base:'https://sebastiancordovaw2.github.io/vue-ionic-inicio-pinia/',
+  //base:'comanda-wistubar.netlify.app',
 
   resolve: {
     alias: {
