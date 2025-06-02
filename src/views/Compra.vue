@@ -22,9 +22,9 @@
                 <ion-col >{{ f.data.cantidad }}</ion-col>
                 <ion-col>{{ f.data.precio  }} <br v-if="f.data.precioCustom" /><ion-badge v-if="f.data.precioCustom" color="danger">{{ f.data.precioCustom }}</ion-badge></ion-col>
                 <ion-col>{{ f.data.cantidad * ((f.data.precioCustom)?f.data.precioCustom:f.data.precio )}}</ion-col>
-                <ion-col><ion-button @click="eliminarCompraProducto(mesa,f)" color="dark" shape="round">-</ion-button></ion-col>
-                 <ion-col><ion-button @click="agregarCompraProducto(mesa,f)" color="dark" shape="round">+</ion-button></ion-col>
-                <ion-col><ion-button @click="eliminarCompra(mesa,f)" color="danger" shape="round">-</ion-button></ion-col>
+                <ion-col><ion-button @click="eliminarCompraProducto(mesa,f)" color="dark" shape="round">-</ion-button>
+                 <ion-button @click="agregarCompraProducto(mesa,f)" color="dark" shape="round">+</ion-button>
+                <ion-button @click="eliminarCompra(mesa,f)" color="danger" shape="round">-</ion-button></ion-col>
                 </ion-row>
             </ion-grid>
 
