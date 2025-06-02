@@ -257,10 +257,9 @@ export const useComanda = defineStore("comanda",{
             for(let i =0;i<[this.compra[mesa][producto.index][producto.j]].length; i++){
                     
                 let cantidad = [this.compra[mesa][producto.index][producto.j]][i].cantidad -=1;
-                if(cantidad < 1)
+                if(cantidad <=1)
                 {
                      this.eliminarCompra(mesa, producto);
-                    break;
                 }
             };
 
