@@ -260,6 +260,7 @@ export const useComanda = defineStore("comanda",{
                 if(cantidad <=1)
                 {
                      this.eliminarCompra(mesa, producto);
+                     break;
                 }
                 [this.compra[mesa][producto.index][producto.j]][i].cantidad -=1
             };
