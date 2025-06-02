@@ -67,7 +67,7 @@ crearIdClienteFunction();
 onMounted(() => {
 
   mesa.value = route.params.id;
-  linkMesa = "/compra/"+mesa.value;
+  linkMesa = "/#/compra/"+mesa.value;
   getProductos();
 
   if(carrito.length==undefined)
