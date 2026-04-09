@@ -1,15 +1,15 @@
 Nombre,Precio,Activo
-Cheeseburger,7000,Si
-Hamburguesa Chacarera,7500,Si
-Hamburguesa Gringa,7500,Si
-Hamburguesa Italiana,7500,Si
-Wistuburguer,8000,Si
+Cheeseburger,5990,Si
+Hamburguesa Chacarera,6990,Si
+Hamburguesa Gringa,6990,Si
+Hamburguesa Italiana,6990,Si
+Wistuburguer,7990,Si
 Chorrillana Cerdo,10990,Si
 Chorrillana Pollo,10990,Si
 Chorrillana Vacuno,10990,Si
 Chorrillana todas las carnes,11990,Si
 Chorrillana pichanga,12990,Si
-Chorrillana Mar y Tierra,14990,Si
+Chorrillana Mar y Tierra,13990,Si
 Menú niños,5990,Si
 Papas Fritas (caseras),6990,Si
 SALCHI papas,7990,Si
@@ -24,9 +24,9 @@ Camarones salteados,14990,Si
 Tabla campestre Filete de costillar,15990,Si
 Tabla chilena,15990,Si
 Salsa queso MERKEN,1500,Si
-Salsa de AJO,1500,Si
-Salsa Verde,1990,Si
-Pebre,1990,Si
+Salsa de AJO,2000,Si
+Salsa Verde,2000,Si
+Pebre,2000,Si
 Pizza pollo champiñón,10990,Si
 Pizza napolitana,10990,Si
 Pizza pepperoni,10990,Si
@@ -126,3 +126,16 @@ Botellin 350cc sin Alcohol,3000,Si
 Mojito Cubano sin Alcohol 500cc,4500,Si
 Mojito Sabores sin Alcohol 500cc,4990,Si
 Trilogía Chilena,19990,Si
+Papas Fritas (Caseras),6990,Si
+Salchipapas,7990,Si
+Papas Bravas,9990,Si
+Tabla Picoteo pequeño,4490,Si
+Tabla Picoteo mediano,8990,Si
+Ceviche salmón 500 gr,12990,Si
+Ensalada César,9990,Si
+Picoteo de camarón,9990,Si
+Tacos de carnitas 3x,9990,Si
+Tortillas para untar,3990,Si
+michemango,6990,Si
+michecamaron,7590,Si
+michemexicana,6990,Si
