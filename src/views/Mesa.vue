@@ -132,7 +132,7 @@ const getProductos = () =>
     Papa.parse("https://sebastiancordovaw2.github.io/vue-ionic-inicio-pinia/productos2.csv",{
     download: true,
     encoding: "UTF-8",
-    delimiter:";",
+    delimiter:",",
       complete:  function (results) {
         for(let i = 0; i<results.data.length; i++){
 
