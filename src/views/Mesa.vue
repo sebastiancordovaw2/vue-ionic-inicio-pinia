@@ -157,15 +157,16 @@ const search = (event)=>{
   if(event.target.value.toLowerCase().trim()!="")
   {
     filter.value = [];
-    for(let i = 0; i<productos.value.length; i++){
-      if(productos.value[i].nombre != undefined)
-      {
-        if(productos.value[i].nombre.normalize('NFD').replace(/[\u0300-\u036f]/g,"").toLowerCase().includes(event.target.value.normalize('NFD').replace(/[\u0300-\u036f]/g,"").toLowerCase()))
-        {
-          filter.value.push(productos.value[i]);
-        }
-      } 
-    }
+    productos.value.forEach((elemento, indice) => 
+    {
+          if(elemento["nombre"] != undefined)
+          {
+            if(elemento["nombre"].normalize('NFD').replace(/[\u0300-\u036f]/g,"").toLowerCase().includes(event.target.value.normalize('NFD').replace(/[\u0300-\u036f]/g,"").toLowerCase()))
+            {
+              filter.value.push(elemento["nombre"]);
+            }
+          } 
+    });
   }
   else{
     filter.value = [];
