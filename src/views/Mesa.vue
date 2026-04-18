@@ -143,7 +143,6 @@ const getProductos = async () => {
             "precio":elemento["precio"],
             "activo":elemento["activo"]
           }
-          
     });
 });
   } catch (error) {
