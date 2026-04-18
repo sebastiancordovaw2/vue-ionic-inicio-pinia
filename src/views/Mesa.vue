@@ -129,7 +129,7 @@ const setCarritoEliminarF = (mesa,producto) =>
 
 const getProductos = async () => {
   try {
-    const response = await fetch('productos.json');
+    const response = await fetch('https://sebastiancordovaw2.github.io/vue-ionic-inicio-pinia/productos.json');
     const data = await response.json();
 
     // Asignamos directamente el array de objetos al valor de productos
