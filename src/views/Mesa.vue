@@ -163,7 +163,7 @@ const search = (event)=>{
           {
             if(elemento["nombre"].normalize('NFD').replace(/[\u0300-\u036f]/g,"").toLowerCase().includes(event.target.value.normalize('NFD').replace(/[\u0300-\u036f]/g,"").toLowerCase()))
             {
-              filter.value.push(elemento["nombre"]);
+              filter.value.push(elemento);
             }
           } 
     });
