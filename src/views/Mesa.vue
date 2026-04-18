@@ -126,29 +126,28 @@ const setCarritoEliminarF = (mesa,producto) =>
   let carro = setCarritoEliminar(mesa,producto);
   carritoGuardado.value = carro;
 }
-  
-const getProductos = () =>
-{
-    Papa.parse("https://sebastiancordovaw2.github.io/vue-ionic-inicio-pinia/productos2.csv",{
-    download: true,
-    encoding: "UTF-8",
-    delimiter:",",
-      complete:  function (results) {
-        for(let i = 0; i<results.data.length; i++){
 
-          if(productos.value[i] == undefined)
-          {
-            productos.value[i] = new Array();
+const getProductos = async () => {
+  try {
+    const response = await fetch('productos.json');
+    const data = await response.json();
+
+    // Asignamos directamente el array de objetos al valor de productos
+    // El JSON ya tiene la estructura: {id, Nombre, Precio, Activo}
+
+    data.forEach((elemento, indice) => 
+    {
+            productos.value[elemento["id"]]={
+            "id":elemento["id"],
+            "nombre":elemento["nombre"],
+            "precio":elemento["precio"],
+            "activo":elemento["activo"]
           }
-          productos.value[i]={
-            "id":results.data[i][0],
-            "nombre":results.data[i][1],
-            "precio":results.data[i][2],
-            "activo":results.data[i][3]
-          }
-        }
-      },
     });
+});
+  } catch (error) {
+    console.error("Error al cargar el archivo JSON:", error);
+  }
 }
  
 const search = (event)=>{
