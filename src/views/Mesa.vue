@@ -144,7 +144,7 @@ const getProductos = async () => {
             "activo":elemento["activo"]
           }
     });
-});
+
   } catch (error) {
     console.error("Error al cargar el archivo JSON:", error);
   }
