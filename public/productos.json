@@ -145,7 +145,7 @@
   { "id": 144, "nombre": "Botellines 650cc", "precio": 3990, "activo": true },
   { "id": 145, "nombre": "red bull sabores", "precio": 0, "activo": true },
   { "id": 146, "nombre": "jumex", "precio": 2500, "activo": true },
-  { "id": 147, "nombre": "Alto del Carmen 40° pisco reservado transparente + Bebida", "precio": 4990, "activo": true },
+  { "id": 147, "nombre": "Alto del Carmen 40° pisco reservado transparente + Bebida", "precio": 5500, "activo": true },
   { "id": 148, "nombre": "jack daniels sabores", "precio": 7990, "activo": true },
   { "id": 149, "nombre": "vodka + energetica", "precio": 7990, "activo": true },
   { "id": 150, "nombre": "Sangría 1/2 Lt.", "precio": 4500, "activo": true },
