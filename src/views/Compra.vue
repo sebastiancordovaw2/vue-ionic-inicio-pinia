@@ -4,6 +4,7 @@
         <ion-toolbar>
           <ion-title>Mesa {{mesa}}</ion-title>
           <ion-button @click="terminarVenta(mesa)" color="danger">Terminar Venta</ion-button>
+          <router-link :to=" {path:'/mesas/}>ir a las mesas</router-link>
         </ion-toolbar>
       </ion-header>
   
