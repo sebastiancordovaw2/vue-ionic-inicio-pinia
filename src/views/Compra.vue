@@ -4,7 +4,7 @@
         <ion-toolbar>
           <ion-title>Mesa {{mesa}}</ion-title>
           <ion-button @click="terminarVenta(mesa)" color="danger">Terminar Venta</ion-button>
-          <a href="mesas/">ir a las mesas</a>
+          <a href="#/mesas/">ir a las mesas</a>
         </ion-toolbar>
       </ion-header>
   
