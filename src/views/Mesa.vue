@@ -4,6 +4,7 @@
       <ion-toolbar>
         <ion-button color="success" @click="setCompra(mesa)">Mesa {{ mesa }} Aceptar</ion-button>
         <a style="color: white; text-decoration: none;" @click="dirigirCompra(mesa)"><ion-button color="dark" >Venta</ion-button></a>
+        <a style="color: white; text-decoration: none;" @click="getProductos()"><ion-button color="dark" ><span v-if="load==false">Cargar productos<span/><span v-if="load==true">cargarndo productos<span/></ion-button></a>
         
       </ion-toolbar>
     </ion-header>
@@ -55,6 +56,7 @@ const filter = ref([])
 const mesa = ref(0);
 const route = useRoute()
 let linkMesa = "";
+let load =  ref(true);
 
 
 
@@ -129,6 +131,7 @@ const setCarritoEliminarF = (mesa,producto) =>
 
 const getProductos = async () => {
   try {
+    load.value = true;
     const response = await fetch('https://sebastiancordovaw2.github.io/vue-ionic-inicio-pinia/productos.json');
     const data = await response.json();
 
@@ -144,6 +147,7 @@ const getProductos = async () => {
             "activo":elemento["activo"]
           }
     });
+    load.value = false;
 
   } catch (error) {
     console.error("Error al cargar el archivo JSON:", error);
