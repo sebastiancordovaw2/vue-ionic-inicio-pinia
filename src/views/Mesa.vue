@@ -4,7 +4,7 @@
       <ion-toolbar>
         <ion-button color="success" @click="setCompra(mesa)">Mesa {{ mesa }} Aceptar</ion-button>
         <a style="color: white; text-decoration: none;" @click="dirigirCompra(mesa)"><ion-button color="dark" >Venta</ion-button></a>
-        <a style="color: white; text-decoration: none;" @click="getProductos()"><ion-button color="dark" ><span v-if="load==false">Cargar productos<span/><span v-if="load==true">cargarndo productos<span/></ion-button></a>
+        <a style="color: black; text-decoration: none;" @click="getProductos()"><ion-button color="default" ><span v-if="load==false">Cargar productos<span/><span v-if="load==true">cargarndo productos<span/></ion-button></a>
         
       </ion-toolbar>
     </ion-header>
