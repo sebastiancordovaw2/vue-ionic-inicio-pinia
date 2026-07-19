@@ -78,7 +78,15 @@ const event =  ref(null);
 onMounted(()=>{
   crearIdClienteFunction();
   getMesas();
-})
+  forceReload();
+
+  setInterval(() => {
+    setTimeout
+  }, 3000);
+
+const forceReload = () => {
+  window.location.reload();
+};
 
 </script>
 
