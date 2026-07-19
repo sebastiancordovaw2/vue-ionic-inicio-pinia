@@ -83,6 +83,7 @@ onMounted(()=>{
   setInterval(() => {
     setTimeout
   }, 3000);
+})
 
 const forceReload = () => {
   window.location.reload();
