@@ -74,7 +74,11 @@ const ultimoToque = ref(0);
 const popoverOpen= ref(false);
 const event =  ref(null);
 // funcion que ejecuta la llamada a las mesas
-crearIdClienteFunction();
-getMesas();
+
+onMounted(()=>{
+  crearIdClienteFunction();
+  getMesas();
+})
+
 </script>
 
