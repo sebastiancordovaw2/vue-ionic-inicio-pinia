@@ -36,6 +36,7 @@ export const useComanda = defineStore("comanda", {
                 let mesas = JSON.parse(localStorage.getItem('mesas'));
                 if (!mesas) {
                     const res = await fetch("https://comanda-wistubar.netlify.app//mesas.json");
+                    //const res = await fetch("/mesas.json");
                     mesas = await res.json();
                 }
 
@@ -288,6 +289,30 @@ export const useComanda = defineStore("comanda", {
 
             } else {
                 alert("Agrega el producto");
+            }
+        },
+        porcentage(procentage, mesa, producto) {
+            if (this.carrito[mesa]) {
+
+                let encontrado = false;
+                for (let index = 0; index < this.carrito[mesa].length; index++) {
+
+                    if (this.carrito[mesa][index].id == producto.id) {
+                        if (this.carrito[mesa][index].precioCustom == undefined)
+                            this.carrito[mesa][index].precioCustom = 0;
+
+                        this.carrito[mesa][index].precioCustom = ((parseInt(this.carrito[mesa][index].precio) - (parseInt(this.carrito[mesa][index].precio) * parseInt(procentage) / 100)));
+                        encontrado = true;
+                        break;
+                    }
+                    else {
+                        encontrado = false;
+                    }
+                }
+
+                if (!encontrado) {
+                    alert("Agrega el producto");
+                }
             }
         }
     },
