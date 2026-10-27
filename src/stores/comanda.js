@@ -80,15 +80,15 @@ export const useComanda = defineStore("comanda", {
 
         },
         cambiarEtiqueta(mesa) {
-            const etiqueta = prompt("Colocal etiqueta");
-            if (etiqueta.trim()) {
-                this.mesas = this.mesas.map(objeto => {
-                    if (objeto.id == mesa.id) {
-                        objeto.etiqueta = etiqueta.trim()
-                    }
-                    return objeto;
-                });
-            }
+            const etiqueta = prompt("Colocar etiqueta");
+
+            this.mesas = this.mesas.map(objeto => {
+                if (objeto.id == mesa.id) {
+                    objeto.etiqueta = etiqueta.trim()
+                }
+                return objeto;
+            });
+
 
             localStorage.setItem("mesas", JSON.stringify(this.mesas));
 
