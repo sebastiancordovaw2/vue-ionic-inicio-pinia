@@ -970,5 +970,17 @@
     "nombre": "ramazzottis 2x",
     "precio": 9990,
     "activo": true
+  },
+  {
+    "id": 163,
+    "nombre": "micheceviche",
+    "precio": 7990,
+    "activo": true
+  },
+  {
+    "id": 164,
+    "nombre": "miche tigre",
+    "precio": 6990,
+    "activo": true
   }
 ]
