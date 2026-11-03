@@ -72,36 +72,7 @@
                         <ion-grid>
                             <ion-row>
                                 <ion-col>
-                                    Rebaja del
-
-                                    <select :value="rebaja" @change="porcentage($event.target.value)">
-                                        <option v-for="porcentaje in [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]"
-                                            :key="porcentaje" :value="porcentaje">
-                                            {{ porcentaje }}%
-                                        </option>
-                                    </select>
-                                </ion-col>
-                            </ion-row>
-
-                            <ion-row>
-                                <ion-col>
                                     Total original: {{ formatoPrecio(total) }}
-                                </ion-col>
-                            </ion-row>
-
-                            <ion-row>
-                                <ion-col>
-                                    Descuento:
-                                    {{ formatoPrecio(total - totalRebajado) }}
-                                </ion-col>
-                            </ion-row>
-
-                            <ion-row>
-                                <ion-col>
-                                    <strong>
-                                        Total rebajado:
-                                        {{ formatoPrecio(totalRebajado) }}
-                                    </strong>
                                 </ion-col>
                             </ion-row>
 
@@ -151,7 +122,6 @@ import { useRoute } from 'vue-router';
 import { ref, computed, watch } from 'vue';
 
 const mesa = ref(0);
-const rebaja = ref(0);
 
 const route = useRoute();
 const comanda = useComanda();
@@ -216,24 +186,15 @@ const total = computed(() => {
     }, 0);
 });
 
-// Calcula el total con descuento.
-const totalRebajado = computed(() => {
-    return total.value * (1 - Number(rebaja.value) / 100);
-});
-
-// La propina se calcula sobre el total rebajado.
+// La propina se calcula sobre el total original.
 const propina = computed(() => {
-    return Math.round(totalRebajado.value * 0.10);
+    return Math.round(total.value * 0.10);
 });
 
 // Total final incluyendo propina.
 const totalPagar = computed(() => {
-    return Math.round(totalRebajado.value) + propina.value;
+    return Math.round(total.value) + propina.value;
 });
-
-function porcentage(valor) {
-    rebaja.value = Number(valor);
-}
 
 function formatoPrecio(valor) {
     return '$' + Math.round(valor).toLocaleString('es-CL');

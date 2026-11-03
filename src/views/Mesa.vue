@@ -37,6 +37,7 @@
                 <ion-col><ion-label @click="cambiarPrecio(mesa, f)">
 
                     <b v-if="carritoGuardado && carritoGuardado[mesa] && verificarCantidad(f)">{{ f.precio }}</b>
+                    <b v-else>{{ f.precio }}</b>
                     <br v-if="f.precioCustom" /><ion-badge v-if="f.precioCustom" color="danger">{{ f.precioCustom
                     }}</ion-badge></ion-label></ion-col>
                 <ion-col>
