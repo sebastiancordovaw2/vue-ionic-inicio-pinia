@@ -35,9 +35,14 @@ export const useComanda = defineStore("comanda", {
                 // Paso 1: Obtener mesas del localStorage o del servidor
                 let mesas = JSON.parse(localStorage.getItem('mesas'));
                 if (!mesas) {
-                    const res = await fetch("https://comanda-wistubar.netlify.app//mesas.json");
-                    //const res = await fetch("/mesas.json");
-                    mesas = await res.json();
+                    try {
+                        const res = await fetch("https://comanda-wistubar.netlify.app//mesas.json");
+                        mesas = await res.json();
+                    } catch (e) {
+                        // Respaldo local (p. ej. en localhost el servidor remoto bloquea por CORS)
+                        const res = await fetch("/mesas.json");
+                        mesas = await res.json();
+                    }
                 }
 
                 // Paso 2: Obtener las mesas abiertas desde la compra
@@ -92,6 +97,49 @@ export const useComanda = defineStore("comanda", {
 
             localStorage.setItem("mesas", JSON.stringify(this.mesas));
 
+        },
+        // Descarga productos.json sin caché y lo guarda en localStorage.
+        async sincronizarProductos() {
+            const url = "https://sebastiancordovaw2.github.io/vue-ionic-inicio-pinia/productos.json";
+            let data;
+            try {
+                const res = await fetch(url + "?t=" + Date.now(), { cache: "no-store" });
+                if (!res.ok) throw new Error("HTTP " + res.status);
+                data = await res.json();
+            } catch (e) {
+                // Respaldo: archivo local de /public
+                const res = await fetch("/productos.json?t=" + Date.now(), { cache: "no-store" });
+                data = await res.json();
+            }
+
+            if (!Array.isArray(data)) {
+                throw new Error("Formato de productos inválido");
+            }
+
+            localStorage.setItem("productos", JSON.stringify(data));
+            localStorage.setItem("productosSync", String(Date.now()));
+            return data;
+        },
+        async obtenerProductos() {
+            const guardados = localStorage.getItem("productos");
+            if (guardados) {
+                try {
+                    return JSON.parse(guardados);
+                } catch (e) { /* si está corrupto, se vuelve a descargar */ }
+            }
+            return await this.sincronizarProductos();
+        },
+        guardarEtiqueta(mesaId, etiqueta) {
+            const texto = (etiqueta || "").trim();
+
+            this.mesas = this.mesas.map(objeto => {
+                if (objeto.id == mesaId) {
+                    objeto.etiqueta = texto;
+                }
+                return objeto;
+            });
+
+            localStorage.setItem("mesas", JSON.stringify(this.mesas));
         },
         setCarrito(carro) {
             this.carrito = carro;
@@ -240,8 +288,13 @@ export const useComanda = defineStore("comanda", {
             window.location.reload(true);
 
         },
-        terminarVenta(mesa) {
-            this.getMesas();
+        async terminarVenta(mesa) {
+            // Esperar a que getMesas termine; si no, su guardado tardío en
+            // localStorage pisaba la etiqueta ya borrada.
+            const actualizadas = await this.getMesas();
+            if (Array.isArray(actualizadas)) {
+                this.mesas = actualizadas;
+            }
             if (confirm("Terminar Venta?") == true) {
                 if (this.compra[mesa] != undefined) {
 
