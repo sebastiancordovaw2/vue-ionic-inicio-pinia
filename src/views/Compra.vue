@@ -1,102 +1,107 @@
 <template>
     <ion-page>
-        <ion-header :translucent="true">
-            <ion-toolbar>
-                <ion-title>Mesa {{ mesa }}</ion-title>
-
-                <ion-button @click="terminarVenta(mesa)" color="danger">
-                    Terminar Venta
-                </ion-button>
-
-                <ion-button color="default">
-                    <a href="#/mesas/">Ir a las mesas</a>
-                </ion-button>
+        <ion-header>
+            <ion-toolbar class="app-toolbar">
+                <ion-buttons slot="start">
+                    <ion-button href="#/mesas/" aria-label="Ir a las mesas">
+                        <ion-icon slot="icon-only" :icon="arrowBackOutline" />
+                    </ion-button>
+                </ion-buttons>
+                <div class="app-title">
+                    Mesa {{ mesa }}
+                    <small>Cuenta de la mesa</small>
+                </div>
+                <ion-buttons slot="end">
+                    <ion-button fill="outline" color="success" @click="irAMesa">
+                        <ion-icon slot="start" :icon="addOutline" />
+                        Agregar
+                    </ion-button>
+                </ion-buttons>
             </ion-toolbar>
         </ion-header>
 
-        <ion-content :fullscreen="true">
-            <div id="container">
+        <ion-content>
+            <div class="app-container">
 
-                <ion-list v-for="f in resultadoFinal" :key="`${f.index}-${f.j}`">
-                    <ion-item>
-                        <ion-grid>
-                            <ion-row>
-                                <ion-col size="5">
-                                    <ion-badge color="danger">
-                                        {{ f.data.horaViwe }}
-                                    </ion-badge>
-                                    <br />
-                                    {{ f.data.nombre }}
-                                </ion-col>
+                <div v-if="resultadoFinal.length == 0" class="app-empty">
+                    <ion-icon :icon="receiptOutline" />
+                    <strong>Esta mesa no tiene consumos</strong><br />
+                    Toca “Agregar” para tomar un pedido
+                </div>
 
-                                <ion-col>
-                                    {{ f.data.cantidad }}
-                                </ion-col>
+                <div v-for="grupo in grupos" :key="grupo.index" class="grupo">
+                    <div class="grupo-titulo">
+                        <span>Pedido {{ grupo.numero }}</span>
+                        <span v-if="grupo.hora" class="hora">
+                            <ion-icon :icon="timeOutline" /> {{ grupo.hora }}
+                        </span>
+                    </div>
 
-                                <ion-col>
-                                    {{ f.data.precio }}
-                                    <br v-if="f.data.precioCustom" />
+                    <div class="tarjeta">
+                        <div v-for="f in grupo.items" :key="`${f.index}-${f.j}`" class="linea">
+                            <div class="info">
+                                <div class="nombre">{{ f.data.nombre }}</div>
+                                <div class="precio-unit">
+                                    <span :class="{ tachado: f.data.precioCustom }">{{ formatoPrecio(f.data.precio)
+                                        }}</span>
+                                    <span v-if="f.data.precioCustom" class="precio-custom">{{
+                                        formatoPrecio(f.data.precioCustom) }}</span>
+                                    <span class="c-unidad">c/u</span>
+                                </div>
+                            </div>
 
-                                    <ion-badge v-if="f.data.precioCustom" color="danger">
-                                        {{ f.data.precioCustom }}
-                                    </ion-badge>
-                                </ion-col>
+                            <div class="acciones">
+                                <div class="stepper">
+                                    <button class="step" @click="eliminarCompraProducto(mesa, f)"
+                                        aria-label="Quitar uno">
+                                        <ion-icon :icon="removeOutline" />
+                                    </button>
+                                    <span class="qty">{{ f.data.cantidad }}</span>
+                                    <button class="step" @click="agregarCompraProducto(mesa, f)"
+                                        aria-label="Agregar uno">
+                                        <ion-icon :icon="addOutline" />
+                                    </button>
+                                </div>
+                                <div class="subtotal">
+                                    {{ formatoPrecio(f.data.cantidad * (f.data.precioCustom || f.data.precio)) }}
+                                </div>
+                                <button class="eliminar" @click="eliminarCompra(mesa, f)" aria-label="Eliminar">
+                                    <ion-icon :icon="trashOutline" />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                                <ion-col>
-                                    {{
-                                        f.data.cantidad *
-                                        (f.data.precioCustom || f.data.precio)
-                                    }}
-                                </ion-col>
-
-                                <ion-col>
-                                    <ion-button @click="eliminarCompraProducto(mesa, f)" color="dark" shape="round">
-                                        -
-                                    </ion-button>
-
-                                    <ion-button @click="agregarCompraProducto(mesa, f)" color="dark" shape="round">
-                                        +
-                                    </ion-button>
-
-                                    <ion-button @click="eliminarCompra(mesa, f)" color="danger" shape="round">
-                                        Eliminar
-                                    </ion-button>
-                                </ion-col>
-                            </ion-row>
-                        </ion-grid>
-                    </ion-item>
-                </ion-list>
-
-                <ion-list v-if="resultadoFinal.length > 0">
-                    <ion-item>
-                        <ion-grid>
-                            <ion-row>
-                                <ion-col>
-                                    Total original: {{ formatoPrecio(total) }}
-                                </ion-col>
-                            </ion-row>
-
-                            <ion-row>
-                                <ion-col>
-                                    Propina (10%):
-                                    {{ formatoPrecio(propina) }}
-                                </ion-col>
-                            </ion-row>
-
-                            <ion-row>
-                                <ion-col>
-                                    <strong>
-                                        Total a pagar:
-                                        {{ formatoPrecio(totalPagar) }}
-                                    </strong>
-                                </ion-col>
-                            </ion-row>
-                        </ion-grid>
-                    </ion-item>
-                </ion-list>
+                <div v-if="resultadoFinal.length > 0" class="tarjeta resumen">
+                    <div class="fila">
+                        <span>Total original</span>
+                        <span>{{ formatoPrecio(total) }}</span>
+                    </div>
+                    <div class="fila">
+                        <span>Propina (10%)</span>
+                        <span>{{ formatoPrecio(propina) }}</span>
+                    </div>
+                    <div class="fila total">
+                        <span>Total a pagar</span>
+                        <span>{{ formatoPrecio(totalPagar) }}</span>
+                    </div>
+                </div>
 
             </div>
         </ion-content>
+
+        <ion-footer class="ion-no-border">
+            <div class="app-footer-bar">
+                <div class="app-footer-inner">
+                    <ion-button size="large" expand="block" class="btn-terminar" @click="terminarVenta(mesa)"
+                        color="danger">
+                        <ion-icon slot="start" :icon="checkmarkDoneOutline" />
+                        Terminar venta
+                    </ion-button>
+                </div>
+            </div>
+        </ion-footer>
     </ion-page>
 </template>
 
@@ -104,17 +109,17 @@
 import {
     IonContent,
     IonHeader,
+    IonFooter,
     IonPage,
     IonToolbar,
-    IonTitle,
-    IonItem,
-    IonList,
+    IonButtons,
     IonButton,
-    IonBadge,
-    IonCol,
-    IonGrid,
-    IonRow
+    IonIcon
 } from '@ionic/vue';
+import {
+    arrowBackOutline, addOutline, removeOutline, trashOutline,
+    receiptOutline, timeOutline, checkmarkDoneOutline
+} from 'ionicons/icons';
 
 import { storeToRefs } from 'pinia';
 import { useComanda } from '../stores/comanda.js';
@@ -173,6 +178,23 @@ for (let index = 0; index < compraUsuarioArray.length; index++) {
     }
 }
 
+// Agrupa las líneas por pedido enviado (cada "Aceptar" crea un pedido nuevo).
+const grupos = computed(() => {
+    const mapa = new Map();
+    resultadoFinal.value.forEach((item) => {
+        if (!mapa.has(item.index)) {
+            mapa.set(item.index, { index: item.index, hora: item.data.horaViwe, items: [] });
+        }
+        mapa.get(item.index).items.push(item);
+    });
+    return Array.from(mapa.values()).map((g, i) => ({ ...g, numero: i + 1 }));
+});
+
+const irAMesa = () => {
+    window.location.href = '/#/mesa/' + mesa.value;
+    window.location.reload(true);
+};
+
 // Calcula el total original sin modificarlo.
 const total = computed(() => {
     return resultadoFinal.value.reduce((acumulado, item) => {
@@ -200,3 +222,173 @@ function formatoPrecio(valor) {
     return '$' + Math.round(valor).toLocaleString('es-CL');
 }
 </script>
+
+<style scoped>
+.btn-terminar {
+    flex: 1;
+    margin: 0;
+}
+
+ion-toolbar ion-button[fill="outline"] {
+    --border-color: rgba(255, 255, 255, .5);
+    --color: #fff;
+}
+
+.grupo {
+    margin-bottom: 16px;
+}
+
+.grupo-titulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    color: var(--app-muted);
+    margin: 4px 4px 8px;
+}
+
+.hora {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #fff4e6;
+    color: var(--ion-color-primary);
+    border-radius: 999px;
+    padding: 2px 10px;
+}
+
+.tarjeta {
+    background: var(--app-surface);
+    border: 1px solid var(--app-border);
+    border-radius: var(--app-radius);
+    box-shadow: var(--app-shadow);
+    overflow: hidden;
+}
+
+.linea {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    padding: 12px;
+}
+
+.linea+.linea {
+    border-top: 1px solid var(--app-border);
+}
+
+.info {
+    flex: 1 1 180px;
+    min-width: 0;
+}
+
+.nombre {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.precio-unit {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--app-muted);
+    margin-top: 2px;
+}
+
+.tachado {
+    text-decoration: line-through;
+}
+
+.precio-custom {
+    background: var(--app-busy-bg);
+    color: var(--app-busy);
+    font-weight: 700;
+    padding: 0 6px;
+    border-radius: 6px;
+}
+
+.acciones {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: auto;
+}
+
+.stepper {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: #f1f3f5;
+    border-radius: 999px;
+    padding: 3px;
+}
+
+.step {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: none;
+    background: #fff;
+    color: #212529;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
+}
+
+.step:active,
+.eliminar:active {
+    transform: scale(.92);
+}
+
+.qty {
+    min-width: 24px;
+    text-align: center;
+    font-weight: 800;
+}
+
+.subtotal {
+    min-width: 80px;
+    text-align: right;
+    font-weight: 700;
+}
+
+.eliminar {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    border: none;
+    background: var(--app-busy-bg);
+    color: var(--app-busy);
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.resumen {
+    padding: 4px 16px;
+}
+
+.fila {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    color: #495057;
+}
+
+.fila+.fila {
+    border-top: 1px dashed var(--app-border);
+}
+
+.fila.total {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--ion-text-color);
+}
+</style>
