@@ -982,5 +982,11 @@
     "nombre": "miche tigre",
     "precio": 6990,
     "activo": true
+  },
+  {
+    "id": 165,
+    "nombre": "miche leon",
+    "precio": 6990,
+    "activo": true
   }
 ]
